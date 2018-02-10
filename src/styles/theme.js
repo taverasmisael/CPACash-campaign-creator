@@ -6,6 +6,11 @@ const DEFAULT_SPACING = 8
 const Theme = createMuiTheme({
   palette: Palette,
   overrides: {
+    MuiFormControl: {
+      root: {
+        margin: DEFAULT_SPACING
+      }
+    },
     MuiInput: {
       root: {
         padding: 0
@@ -46,7 +51,16 @@ const Theme = createMuiTheme({
         margin: DEFAULT_SPACING / 4
       }
     },
+    MuiFormControlLabel: {
+      root: {
+        margin: 0,
+        marginLeft: DEFAULT_SPACING
+      }
+    },
     MuiSwitch: {
+      root: {
+        order: 2
+      },
       default: {
         color: Palette.error[400]
       },
@@ -61,6 +75,11 @@ const Theme = createMuiTheme({
           backgroundColor: Palette.secondary.main,
           opacity: 0.5
         }
+      }
+    },
+    MuiGrid: {
+      typeContainer: {
+        padding: DEFAULT_SPACING * 2
       }
     }
   }
