@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
+import { titleCase } from 'change-case'
 
-import ConditionsList from '../../lists/ConditionsList'
+import ConditionsContainer from '../ConditionsContainer'
 class App extends PureComponent {
   state = {
     conditions: {
@@ -18,12 +19,21 @@ class App extends PureComponent {
         5: { id: '5', value: 'Emotion' }
       }
     },
-    activeConditions: [
-      { id: 0, conditionName: 'Device', conditionKey: 'devices', mode: true, value: ['20', '30'] },
-      { id: 1, conditionName: 'Countries', conditionKey: 'countries', mode: false, value: [] }
-    ]
+    activeConditions: [{ id: 0, conditionName: 'Device', conditionKey: 'devices', mode: true, value: ['20', '30'] }]
   }
 
+  conditionExist = type => Boolean(this.state.activeConditions.find(c => c.conditionKey === type))
+  createCondition = type => {
+    if (!this.conditionExist(type)) {
+      const id = Math.random() * 10 + 1 // FIX: Change this implmentation
+      this.setState(state => ({
+        activeConditions: [
+          ...state.activeConditions,
+          { id, conditionName: titleCase(type), conditionKey: type, mode: true, value: [] }
+        ]
+      }))
+    }
+  }
   onDeleteCondition = id => {
     const activeConditions = this.state.activeConditions.filter(c => c.id !== id)
     this.setState({ activeConditions })
@@ -31,11 +41,13 @@ class App extends PureComponent {
   render() {
     return (
       <Fragment>
-        <ConditionsList
+        <ConditionsContainer
+          conditionExist={this.conditionExist}
           onDelete={this.onDeleteCondition}
+          onCreateCondition={this.createCondition}
           conditions={this.state.conditions}
           activeConditions={this.state.activeConditions}
-        />{' '}
+        />
       </Fragment>
     )
   }
