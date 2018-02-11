@@ -6,6 +6,7 @@ class App extends PureComponent {
     return (
       <Fragment>
         <Condition
+          id={0}
           conditionName="Operating System"
           mode={false}
           conditionsList={{
@@ -30,6 +31,7 @@ class App extends PureComponent {
               value: 'Mac'
             }
           }}
+          onDelete={id => () => console.log(id)}
         />
       </Fragment>
     )

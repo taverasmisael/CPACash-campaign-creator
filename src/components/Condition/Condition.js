@@ -5,6 +5,8 @@ import Typography from 'material-ui/Typography'
 import FormControlLabel from 'material-ui/Form/FormControlLabel'
 import Switch from 'material-ui/Switch'
 import Grid from 'material-ui/Grid'
+import IconButton from 'material-ui/IconButton'
+import DeleteIcon from 'material-ui-icons/Delete'
 
 import MultiSelect from '../MultiSelect'
 
@@ -34,14 +36,14 @@ class Condition extends PureComponent {
 
   render() {
     const { mode, conditionName, switchText, activeConditions, conditionsList } = this.state
-
+    const { onDelete, id } = this.props
     return (
       <Grid container spacing={16} alignItems="flex-end">
-        <Grid item xs={6} sm={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Typography variant="title">{conditionName}</Typography>
           <FormControlLabel control={<Switch checked={mode} onChange={this.onModeChange} />} label={switchText} />
         </Grid>
-        <Grid item xs={6} sm={9}>
+        <Grid item xs={10} sm={4} md={7}>
           <MultiSelect
             fullWidth
             label="Conditions"
@@ -50,6 +52,11 @@ class Condition extends PureComponent {
             value={activeConditions}
             list={conditionsList}
           />
+        </Grid>
+        <Grid item xs={2}>
+          <IconButton aria-label="Delete" onClick={onDelete(id)}>
+            <DeleteIcon />
+          </IconButton>
         </Grid>
       </Grid>
     )
