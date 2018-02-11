@@ -9,6 +9,9 @@ import Button from 'material-ui/Button'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/Menu/MenuItem'
 
+import withStyles from 'material-ui/styles/withStyles'
+import styles from '../styles'
+
 const ConditionShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
   conditionName: PropTypes.string.isRequired,
@@ -49,15 +52,19 @@ class ConditionsContainer extends PureComponent {
 
   render() {
     const { anchorEl, activeConditionsKeys } = this.state
-    const { conditions, activeConditions, onDelete } = this.props
+    const { conditions, activeConditions, onDelete, classes } = this.props
     return (
       <Fragment>
-        <ConditionsList onDelete={onDelete} conditions={conditions} activeConditions={activeConditions} />
-        <Button
-          aria-haspopup="true"
-          onClick={this.openAddMenu}
-          aria-owns={anchorEl ? 'simple-menu' : null}
-        >
+        <div className={classes.containerList}>
+          <ConditionsList
+            emptyMessage="There are no conditions in this rule. Please add a condition using the button down below"
+            isEmpty={!activeConditions.length}
+            onDelete={onDelete}
+            conditions={conditions}
+            activeConditions={activeConditions}
+          />
+        </div>
+        <Button aria-haspopup="true" onClick={this.openAddMenu} aria-owns={anchorEl ? 'simple-menu' : null}>
           Add Condition
         </Button>
         <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.closeAddMenu}>
@@ -72,4 +79,4 @@ class ConditionsContainer extends PureComponent {
   }
 }
 
-export default ConditionsContainer
+export default withStyles(styles)(ConditionsContainer)

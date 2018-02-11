@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+import EmptyContainer from '../../HOCs/EmptyContainer'
 import Condition from '../../components/Condition'
+
 const ConditionShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
   conditionName: PropTypes.string.isRequired,
@@ -11,6 +13,7 @@ const ConditionShape = PropTypes.shape({
 })
 class ConditionsList extends PureComponent {
   static propTypes = {
+    ...EmptyContainer.propTypes,
     conditions: PropTypes.object.isRequired,
     activeConditions: PropTypes.arrayOf(ConditionShape),
     onDelete: PropTypes.func.isRequired
@@ -37,4 +40,4 @@ class ConditionsList extends PureComponent {
   }
 }
 
-export default ConditionsList
+export default EmptyContainer(ConditionsList)

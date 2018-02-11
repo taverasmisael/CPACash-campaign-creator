@@ -46,7 +46,7 @@ class Condition extends PureComponent {
         </Grid>
         <Grid item xs={10} sm={6} md={9}>
           <Grid container spacing={16} alignItems="flex-end" style={{padding: 0}}>
-            <Grid item xs={10}>
+            <Grid item xs={11}>
               <MultiSelect
                 fullWidth
                 label="Conditions"
@@ -56,7 +56,7 @@ class Condition extends PureComponent {
                 list={conditionsList}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1} style={{ marginBottom: '8px'}}>
               <IconButton aria-label="Delete" onClick={onDelete}>
                 <DeleteIcon />
               </IconButton>
