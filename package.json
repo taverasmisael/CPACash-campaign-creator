@@ -3,6 +3,8 @@
   "version": "0.1.2",
   "private": true,
   "dependencies": {
+    "change-case": "^3.0.1",
+    "just-compare": "^1.2.1",
     "material-ui": "^1.0.0-beta.32",
     "material-ui-icons": "^1.0.0-beta.17",
     "prop-types": "^15.6.0",
