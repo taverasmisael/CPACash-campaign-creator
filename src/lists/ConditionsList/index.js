@@ -1,3 +1,3 @@
-import ConditionsList from "./ConditionsList";
+import ConditionsList from './ConditionsList'
 
 export default ConditionsList
