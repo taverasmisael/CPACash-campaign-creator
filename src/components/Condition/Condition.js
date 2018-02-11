@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import Typography from 'material-ui/Typography'
@@ -13,7 +13,7 @@ class Condition extends PureComponent {
     mode: PropTypes.bool,
     conditionName: PropTypes.string.isRequired,
     activeConditions: PropTypes.arrayOf(PropTypes.string),
-    conditionsList: PropTypes.arrayOf(PropTypes.string)
+    conditionsList: PropTypes.object
   }
 
   static defaultProps = {
@@ -37,11 +37,11 @@ class Condition extends PureComponent {
 
     return (
       <Grid container spacing={16} alignItems="flex-end">
-        <Grid item xs={3}>
+        <Grid item xs={6} sm={3}>
           <Typography variant="title">{conditionName}</Typography>
           <FormControlLabel control={<Switch checked={mode} onChange={this.onModeChange} />} label={switchText} />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={6} sm={9}>
           <MultiSelect
             fullWidth
             label="Conditions"
@@ -49,7 +49,6 @@ class Condition extends PureComponent {
             onChange={this.onChangeCondition}
             value={activeConditions}
             list={conditionsList}
-            disabled={!conditionsList.length}
           />
         </Grid>
       </Grid>

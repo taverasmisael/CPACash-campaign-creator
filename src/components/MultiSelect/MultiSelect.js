@@ -14,7 +14,7 @@ class MultiSelect extends PureComponent {
     label: PropTypes.string.isRequired,
     value: PropTypes.arrayOf(PropTypes.string),
     onChange: PropTypes.func.isRequired,
-    list: PropTypes.arrayOf(PropTypes.string).isRequired
+    list: PropTypes.object.isRequired
   }
   onDeleteItem = item => {
     const value = this.props.value.filter(v => v !== item)
@@ -24,14 +24,16 @@ class MultiSelect extends PureComponent {
     const { label, value, list, onChange, placeholder, ...props } = this.props
     return (
       <FormControl {...props}>
-        <InputLabel shrink htmlFor="select-multiple-chip">{label}</InputLabel>
+        <InputLabel shrink htmlFor="select-multiple-chip">
+          {label}
+        </InputLabel>
         <Select
           multiple
           placeholder={placeholder}
           value={value}
           onChange={onChange}
           input={<Input id="select-multiple-chip" placeholder={placeholder} />}
-          renderValue={list => ChipContainer(list, this.onDeleteItem)}
+          renderValue={selected => ChipContainer(selected, list, this.onDeleteItem)}
         >
           {SelectItems({ value: value, items: list })}
         </Select>
