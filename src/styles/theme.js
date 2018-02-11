@@ -57,26 +57,6 @@ const Theme = createMuiTheme({
         marginLeft: DEFAULT_SPACING
       }
     },
-    MuiSwitch: {
-      root: {
-        order: 2
-      },
-      default: {
-        color: Palette.error[400]
-      },
-      bar: {
-        backgroundColor: Palette.error[400],
-        opacity: 0.5
-      },
-      checked: {
-        color: Palette.secondary.main,
-        transform: 'translateX(14px)',
-        '& + $bar': {
-          backgroundColor: Palette.secondary.main,
-          opacity: 0.5
-        }
-      }
-    },
     MuiGrid: {
       typeContainer: {
         padding: DEFAULT_SPACING * 2
