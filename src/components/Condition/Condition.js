@@ -39,25 +39,29 @@ class Condition extends PureComponent {
     const { mode, conditionName, switchText, value, conditionsList } = this.state
     const { onDelete } = this.props
     return (
-      <Grid container spacing={16} alignItems="flex-end">
+      <Grid container spacing={16} alignItems="center">
         <Grid item xs={12} sm={6} md={3}>
           <Typography variant="title">{conditionName}</Typography>
           <FormControlLabel control={<Checkbox checked={mode} onChange={this.onModeChange} />} label={switchText} />
         </Grid>
-        <Grid item xs={10} sm={4} md={7}>
-          <MultiSelect
-            fullWidth
-            label="Conditions"
-            placeholder="Select the conditions"
-            onChange={this.onChangeCondition}
-            value={value}
-            list={conditionsList}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <IconButton aria-label="Delete" onClick={onDelete}>
-            <DeleteIcon />
-          </IconButton>
+        <Grid item xs={10} sm={6} md={9}>
+          <Grid container spacing={16} alignItems="flex-end" style={{padding: 0}}>
+            <Grid item xs={10}>
+              <MultiSelect
+                fullWidth
+                label="Conditions"
+                placeholder="Select the conditions"
+                onChange={this.onChangeCondition}
+                value={value}
+                list={conditionsList}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <IconButton aria-label="Delete" onClick={onDelete}>
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     )
