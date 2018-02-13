@@ -56,7 +56,7 @@ class Condition extends PureComponent {
                 list={conditionsList}
               />
             </Grid>
-            <Grid item xs={1} style={{ marginBottom: '8px'}}>
+            <Grid item xs={1} style={{ marginBottom: '4px'}}>
               <IconButton aria-label="Delete" onClick={onDelete}>
                 <DeleteIcon />
               </IconButton>

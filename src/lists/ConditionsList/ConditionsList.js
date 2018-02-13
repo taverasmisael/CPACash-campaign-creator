@@ -5,7 +5,7 @@ import EmptyContainer from '../../HOCs/EmptyContainer'
 import Condition from '../../components/Condition'
 
 const ConditionShape = PropTypes.shape({
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   conditionName: PropTypes.string.isRequired,
   conditionKey: PropTypes.string.isRequired,
   mode: PropTypes.bool.isRequired,

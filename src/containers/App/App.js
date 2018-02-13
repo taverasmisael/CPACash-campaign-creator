@@ -1,7 +1,11 @@
 import React, { PureComponent, Fragment } from 'react'
 import { titleCase } from 'change-case'
+import { v4 as uuid } from 'uuid'
+
+import Divider from 'material-ui/Divider'
 
 import ConditionsContainer from '../ConditionsContainer'
+import OffersContainer from '../OffersContainer'
 class App extends PureComponent {
   state = {
     conditions: {
@@ -19,13 +23,22 @@ class App extends PureComponent {
         5: { id: '5', value: 'Emotion' }
       }
     },
-    activeConditions: [{ id: 0, conditionName: 'Device', conditionKey: 'devices', mode: true, value: ['20', '30'] }]
+    activeConditions: [
+      { id: uuid(), conditionName: 'Device', conditionKey: 'devices', mode: true, value: ['20', '30'] }
+    ],
+    offersList: [
+      { id: '0', value: 'Oferta Random' },
+      { id: '1', value: 'Oferta Random 1' },
+      { id: '2', value: 'Oferta Random 2' },
+      { id: '3', value: 'Oferta Random 3' }
+    ],
+    activeOffers: [{ value: '0', weight: '15', id: uuid() }]
   }
 
   conditionExist = type => Boolean(this.state.activeConditions.find(c => c.conditionKey === type))
   createCondition = type => {
     if (!this.conditionExist(type)) {
-      const id = Math.random() * 10 + 1 // FIX: Change this implmentation
+      const id = uuid()
       this.setState(state => ({
         activeConditions: [
           ...state.activeConditions,
@@ -34,9 +47,22 @@ class App extends PureComponent {
       }))
     }
   }
+  createOffer = () =>
+    this.setState(state => ({
+      ...state,
+      activeOffers: [...state.activeOffers, { value: '0', weight: '15', id: uuid() }]
+    }))
   onDeleteCondition = id => {
     const activeConditions = this.state.activeConditions.filter(c => c.id !== id)
     this.setState({ activeConditions })
+  }
+  onDeleteOffer = id => {
+    const activeOffers = this.state.activeOffers.filter(o => o.id !== id)
+    this.setState({ activeOffers })
+  }
+  handleOfferChange = ({ id, name, value }) => {
+    const activeOffers = this.state.activeOffers.map(o => (o.id === id ? { ...o, [name]: value } : o))
+    this.setState({ activeOffers })
   }
   render() {
     return (
@@ -47,6 +73,14 @@ class App extends PureComponent {
           onCreateCondition={this.createCondition}
           conditions={this.state.conditions}
           activeConditions={this.state.activeConditions}
+        />
+        <Divider />
+        <OffersContainer
+          offers={this.state.offersList}
+          activeOffers={this.state.activeOffers}
+          onCreate={this.createOffer}
+          onChange={this.handleOfferChange}
+          onDelete={this.onDeleteOffer}
         />
       </Fragment>
     )

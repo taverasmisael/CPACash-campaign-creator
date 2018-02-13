@@ -6,7 +6,6 @@ import Input from 'material-ui/Input'
 import InputLabel from 'material-ui/Input/InputLabel'
 import FormControl from 'material-ui/Form/FormControl'
 
-import ChipContainer from './ChipContainer'
 import SelectItems from './SelectItems'
 import withStyles from 'material-ui/styles/withStyles'
 class MultiSelect extends PureComponent {
@@ -33,7 +32,7 @@ class MultiSelect extends PureComponent {
           value={value}
           onChange={onChange}
           input={<Input id="select-multiple-chip" placeholder={placeholder} />}
-          renderValue={selected => ChipContainer(selected, list, this.onDeleteItem)}
+          renderValue={selected => selected.map(s => list[s].value).join(', ')}
         >
           {SelectItems({ value: value, items: list })}
         </Select>
