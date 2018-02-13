@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.2.0...v0.3.0) (2018-02-13)
+
+
+### Bug Fixes
+
+* **Condition:** conditions id more unique with UUID ([85fdbcf](https://github.com/taverasmisael/CPACash-campaign-creator/commit/85fdbcf))
+
+
+### Features
+
+* **lib:** add uuid ([b7e6e95](https://github.com/taverasmisael/CPACash-campaign-creator/commit/b7e6e95))
+* **OffersContainer:** create/implement OffersContainer ([ed84906](https://github.com/taverasmisael/CPACash-campaign-creator/commit/ed84906))
+* **OffersList:** create component and prepare it to lift up the state ([4a9d011](https://github.com/taverasmisael/CPACash-campaign-creator/commit/4a9d011))
+* **styles:** add styles for ListContainer ([85cf504](https://github.com/taverasmisael/CPACash-campaign-creator/commit/85cf504))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.1.2...v0.2.0) (2018-02-11)
 
