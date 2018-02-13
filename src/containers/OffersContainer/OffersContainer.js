@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'material-ui/Button'
+import Typography from 'material-ui/Typography'
 import OffersList from '../../lists/OffersList'
 
 import withStyles from 'material-ui/styles/withStyles'
@@ -13,7 +14,10 @@ const OfferShape = PropTypes.shape({
   weight: PropTypes.string.isRequired
 })
 const OffersContainer = ({ offers, activeOffers, onDelete, classes, onCreate, onChange }) => (
-  <Fragment>
+  <div className={classes.wrapper}>
+    <Typography variant="headline" gutterBottom>
+      Offers
+    </Typography>
     <div className={classes.containerList}>
       <OffersList
         emptyMessage="There are no offers in this rule. Please add a offer using the button down below"
@@ -24,10 +28,10 @@ const OffersContainer = ({ offers, activeOffers, onDelete, classes, onCreate, on
         activeOffers={activeOffers}
       />
     </div>
-    <Button aria-haspopup="true" onClick={onCreate} className={classes.addButton}>
+    <Button aria-haspopup="true" onClick={onCreate}>
       Add Offer
     </Button>
-  </Fragment>
+  </div>
 )
 
 OffersContainer.propTypes = {

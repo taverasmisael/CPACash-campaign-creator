@@ -2,6 +2,8 @@ import React, { PureComponent, Fragment } from 'react'
 import { titleCase } from 'change-case'
 import { v4 as uuid } from 'uuid'
 
+import Divider from 'material-ui/Divider'
+
 import ConditionsContainer from '../ConditionsContainer'
 import OffersContainer from '../OffersContainer'
 class App extends PureComponent {
@@ -72,6 +74,7 @@ class App extends PureComponent {
           conditions={this.state.conditions}
           activeConditions={this.state.activeConditions}
         />
+        <Divider />
         <OffersContainer
           offers={this.state.offersList}
           activeOffers={this.state.activeOffers}

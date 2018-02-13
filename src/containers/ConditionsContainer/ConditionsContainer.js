@@ -1,13 +1,14 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import { titleCase } from 'change-case'
 import compare from 'just-compare'
 
-import ConditionsList from '../../lists/ConditionsList'
+import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/Menu/MenuItem'
+import ConditionsList from '../../lists/ConditionsList'
 
 import withStyles from 'material-ui/styles/withStyles'
 import styles from '../styles'
@@ -54,7 +55,10 @@ class ConditionsContainer extends PureComponent {
     const { anchorEl, activeConditionsKeys } = this.state
     const { conditions, activeConditions, onDelete, classes } = this.props
     return (
-      <Fragment>
+      <div className={classes.wrapper}>
+        <Typography variant="headline" gutterBottom>
+          Conditions
+        </Typography>
         <div className={classes.containerList}>
           <ConditionsList
             emptyMessage="There are no conditions in this rule. Please add a condition using the button down below"
@@ -64,7 +68,12 @@ class ConditionsContainer extends PureComponent {
             activeConditions={activeConditions}
           />
         </div>
-        <Button aria-haspopup="true" onClick={this.openAddMenu} aria-owns={anchorEl ? 'simple-menu' : null} className={classes.addButton}>
+        <Button
+          aria-haspopup="true"
+          onClick={this.openAddMenu}
+          aria-owns={anchorEl ? 'simple-menu' : null}
+          className={classes.addButton}
+        >
           Add Condition
         </Button>
         <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.closeAddMenu}>
@@ -74,7 +83,7 @@ class ConditionsContainer extends PureComponent {
             </MenuItem>
           ))}
         </Menu>
-      </Fragment>
+      </div>
     )
   }
 }
