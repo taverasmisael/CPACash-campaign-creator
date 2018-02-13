@@ -1,17 +1,15 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { titleCase } from 'change-case'
 import compare from 'just-compare'
 
-import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/Menu/MenuItem'
-import ConditionsList from '../../lists/ConditionsList'
 
-import withStyles from 'material-ui/styles/withStyles'
-import styles from '../styles'
+import Container from '../Container'
+import ConditionsList from '../../lists/ConditionsList'
 
 const ConditionShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
@@ -51,29 +49,15 @@ class ConditionsContainer extends PureComponent {
     })
   }
 
-  render() {
+  creator = () => {
     const { anchorEl, activeConditionsKeys } = this.state
-    const { conditions, activeConditions, onDelete, classes } = this.props
+    const { conditions } = this.props
     return (
-      <div className={classes.wrapper}>
-        <Typography variant="headline" gutterBottom>
-          Conditions
-        </Typography>
-        <div className={classes.containerList}>
-          <ConditionsList
-            emptyMessage="There are no conditions in this rule. Please add a condition using the button down below"
-            isEmpty={!activeConditions.length}
-            onDelete={onDelete}
-            conditions={conditions}
-            activeConditions={activeConditions}
-          />
-        </div>
+      <Fragment>
         <Button
           aria-haspopup="true"
           onClick={this.openAddMenu}
-          aria-owns={anchorEl ? 'simple-menu' : null}
-          className={classes.addButton}
-        >
+          aria-owns={anchorEl ? 'simple-menu' : null}>
           Add Condition
         </Button>
         <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.closeAddMenu}>
@@ -83,9 +67,27 @@ class ConditionsContainer extends PureComponent {
             </MenuItem>
           ))}
         </Menu>
-      </div>
+      </Fragment>
+    )
+  }
+
+  render() {
+    const { conditions, activeConditions, onDelete } = this.props
+    return (
+      <Container
+        ListComponent={ConditionsList}
+        listProps={{
+          emptyMessage: 'There are no conditions in this rule. Please add a condition using the button down below',
+          isEmpty: !activeConditions.length,
+          onDelete: onDelete,
+          conditions: conditions,
+          activeConditions: activeConditions
+        }}
+        CustomCreator={this.creator}
+        title="Conditions"
+      />
     )
   }
 }
 
-export default withStyles(styles)(ConditionsContainer)
+export default ConditionsContainer
