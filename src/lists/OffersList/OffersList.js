@@ -34,8 +34,7 @@ class OffersList extends Component {
   )
 
   render() {
-    const { activeOffers } = this.props
-    return activeOffers.map(this.renderOffer)
+    return this.props.activeOffers.map(this.renderOffer)
   }
 }
 

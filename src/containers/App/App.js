@@ -1,8 +1,9 @@
 import React, { PureComponent, Fragment } from 'react'
 import { titleCase } from 'change-case'
+import { v4 as uuid } from 'uuid'
 
 import ConditionsContainer from '../ConditionsContainer'
-import OffersList from '../../lists/OffersList'
+import OffersContainer from '../OffersContainer'
 class App extends PureComponent {
   state = {
     conditions: {
@@ -42,6 +43,11 @@ class App extends PureComponent {
       }))
     }
   }
+  createOffer = () =>
+    this.setState(state => ({
+      ...state,
+      activeOffers: [...state.activeOffers, { value: '0', weight: '15', id: uuid() }]
+    }))
   onDeleteCondition = id => {
     const activeConditions = this.state.activeConditions.filter(c => c.id !== id)
     this.setState({ activeConditions })
@@ -51,7 +57,7 @@ class App extends PureComponent {
     this.setState({ activeOffers })
   }
   handleOfferChange = ({ id, name, value }) => {
-    const activeOffers = this.state.activeOffers.map(o => (o.id === id ? { ...o, [name]: value } : {}))
+    const activeOffers = this.state.activeOffers.map(o => (o.id === id ? { ...o, [name]: value } : o))
     this.setState({ activeOffers })
   }
   render() {
@@ -64,11 +70,10 @@ class App extends PureComponent {
           conditions={this.state.conditions}
           activeConditions={this.state.activeConditions}
         />
-        <OffersList
-          isEmpty={!this.state.activeOffers.length}
-          emptyMessage="Please add an offer and assign it some weight"
+        <OffersContainer
           offers={this.state.offersList}
           activeOffers={this.state.activeOffers}
+          onCreate={this.createOffer}
           onChange={this.handleOfferChange}
           onDelete={this.onDeleteOffer}
         />
