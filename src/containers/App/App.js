@@ -21,14 +21,16 @@ class App extends PureComponent {
         5: { id: '5', value: 'Emotion' }
       }
     },
-    activeConditions: [{ id: uuid(), conditionName: 'Device', conditionKey: 'devices', mode: true, value: ['20', '30'] }],
+    activeConditions: [
+      { id: uuid(), conditionName: 'Device', conditionKey: 'devices', mode: true, value: ['20', '30'] }
+    ],
     offersList: [
       { id: '0', value: 'Oferta Random' },
       { id: '1', value: 'Oferta Random 1' },
       { id: '2', value: 'Oferta Random 2' },
       { id: '3', value: 'Oferta Random 3' }
     ],
-    activeOffers: [{ value: '0', weight: '15', id: '0' }]
+    activeOffers: [{ value: '0', weight: '15', id: uuid() }]
   }
 
   conditionExist = type => Boolean(this.state.activeConditions.find(c => c.conditionKey === type))
