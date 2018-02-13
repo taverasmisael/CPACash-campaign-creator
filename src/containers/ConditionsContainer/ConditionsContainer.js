@@ -64,7 +64,7 @@ class ConditionsContainer extends PureComponent {
             activeConditions={activeConditions}
           />
         </div>
-        <Button aria-haspopup="true" onClick={this.openAddMenu} aria-owns={anchorEl ? 'simple-menu' : null}>
+        <Button aria-haspopup="true" onClick={this.openAddMenu} aria-owns={anchorEl ? 'simple-menu' : null} className={classes.addButton}>
           Add Condition
         </Button>
         <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.closeAddMenu}>

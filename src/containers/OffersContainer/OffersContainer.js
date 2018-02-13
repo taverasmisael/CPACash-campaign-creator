@@ -24,7 +24,7 @@ const OffersContainer = ({ offers, activeOffers, onDelete, classes, onCreate, on
         activeOffers={activeOffers}
       />
     </div>
-    <Button aria-haspopup="true" onClick={onCreate}>
+    <Button aria-haspopup="true" onClick={onCreate} className={classes.addButton}>
       Add Offer
     </Button>
   </Fragment>
