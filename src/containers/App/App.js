@@ -2,7 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { titleCase } from 'change-case'
 
 import ConditionsContainer from '../ConditionsContainer'
-import Offer from '../../components/Offer'
+import OffersList from '../../lists/OffersList'
 class App extends PureComponent {
   state = {
     conditions: {
@@ -27,8 +27,7 @@ class App extends PureComponent {
       { id: '2', value: 'Oferta Random 2' },
       { id: '3', value: 'Oferta Random 3' }
     ],
-    selectedOffer: '0',
-    offerWeight: '15'
+    activeOffers: [{ value: '0', weight: '15', id: '0' }]
   }
 
   conditionExist = type => Boolean(this.state.activeConditions.find(c => c.conditionKey === type))
@@ -47,24 +46,31 @@ class App extends PureComponent {
     const activeConditions = this.state.activeConditions.filter(c => c.id !== id)
     this.setState({ activeConditions })
   }
-
-  handleOfferChange = ({ target }) => this.setState({ [target.name]: target.value })
+  onDeleteOffer = id => {
+    const activeOffers = this.state.activeOffers.filter(o => o.id !== id)
+    this.setState({ activeOffers })
+  }
+  handleOfferChange = ({ id, name, value }) => {
+    const activeOffers = this.state.activeOffers.map(o => (o.id === id ? { ...o, [name]: value } : {}))
+    this.setState({ activeOffers })
+  }
   render() {
     return (
       <Fragment>
-        {/* <ConditionsContainer
+        <ConditionsContainer
           conditionExist={this.conditionExist}
           onDelete={this.onDeleteCondition}
           onCreateCondition={this.createCondition}
           conditions={this.state.conditions}
           activeConditions={this.state.activeConditions}
-        /> */}
-        <Offer
+        />
+        <OffersList
+          isEmpty={!this.state.activeOffers.length}
+          emptyMessage="Please add an offer and assign it some weight"
+          offers={this.state.offersList}
+          activeOffers={this.state.activeOffers}
           onChange={this.handleOfferChange}
-          offersList={this.state.offersList}
-          selectedOffer={this.state.selectedOffer}
-          offerWeight={this.state.offerWeight}
-          offerId={'s'}
+          onDelete={this.onDeleteOffer}
         />
       </Fragment>
     )
