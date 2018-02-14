@@ -10,13 +10,17 @@ import DeleteIcon from 'material-ui-icons/Delete'
 
 import MultiSelect from '../MultiSelect'
 
+import withStyles from 'material-ui/styles/withStyles'
+import styles from './styles'
+
 class Condition extends PureComponent {
   static propTypes = {
-    onDelete: PropTypes.func.isRequired,
     mode: PropTypes.bool,
+    conditionsList: PropTypes.object,
+    classes: PropTypes.object,
+    onDelete: PropTypes.func.isRequired,
     conditionName: PropTypes.string.isRequired,
-    value: PropTypes.arrayOf(PropTypes.string),
-    conditionsList: PropTypes.object
+    value: PropTypes.arrayOf(PropTypes.string)
   }
 
   static defaultProps = {
@@ -37,35 +41,35 @@ class Condition extends PureComponent {
 
   render() {
     const { mode, conditionName, switchText, value, conditionsList } = this.state
-    const { onDelete } = this.props
+    const { onDelete, classes } = this.props
     return (
-      <Grid container spacing={16} alignItems="center">
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography variant="body2">{conditionName}</Typography>
+      <Grid container spacing={16}>
+        <Grid item xs={8} sm={5} md={2} className={`${classes.item} ${classes.itemWithMargin}`}>
+          <Typography variant="body2" gutterBottom>
+            {conditionName}
+          </Typography>
+        </Grid>
+        <Grid item xs={4} sm={2} className={`${classes.item} ${classes.itemWithMargin}`}>
           <FormControlLabel control={<Checkbox checked={mode} onChange={this.onModeChange} />} label={switchText} />
         </Grid>
-        <Grid item xs={10} sm={6} md={9}>
-          <Grid container spacing={16} alignItems="flex-end" style={{padding: 0}}>
-            <Grid item xs={11}>
-              <MultiSelect
-                fullWidth
-                label="Conditions"
-                placeholder="Select the conditions"
-                onChange={this.onChangeCondition}
-                value={value}
-                list={conditionsList}
-              />
-            </Grid>
-            <Grid item xs={1} style={{ marginBottom: '4px'}}>
-              <IconButton aria-label="Delete" onClick={onDelete}>
-                <DeleteIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
+        <Grid item xs={10} sm={11} md={7} className={classes.item}>
+          <MultiSelect
+            fullWidth
+            label="Conditions"
+            placeholder="Select the conditions"
+            onChange={this.onChangeCondition}
+            value={value}
+            list={conditionsList}
+          />
+        </Grid>
+        <Grid item xs={2} sm={1} className={`${classes.item} ${classes.itemWithMargin}`}>
+          <IconButton aria-label="Delete" onClick={onDelete}>
+            <DeleteIcon />
+          </IconButton>
         </Grid>
       </Grid>
     )
   }
 }
 
-export default Condition
+export default withStyles(styles)(Condition)
