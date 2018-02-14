@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 
 import { v4 as uuid } from 'uuid'
-import RulesList from '../../lists/RulesList'
-
+import RulesContainer from '../RulesContainer'
 class App extends PureComponent {
   state = {
     conditions: {
@@ -52,15 +51,19 @@ class App extends PureComponent {
     const rules = this.state.rules.map(r => (r.id === id ? { ...r, ...changes } : r))
     this.setState({ rules })
   }
+  onCreateRule = () =>
+    this.setState(state => ({
+      ...state,
+      rules: [...state.rules, { id: uuid(), activeConditions: [], activeOffers: [] }]
+    }))
   render() {
     const { rules, conditions, offersList } = this.state
     return (
-      <RulesList
-        isEmpty={!Object.keys(rules).length}
-        emptyMessage="Add some rules"
+      <RulesContainer
         rules={rules}
-        conditions={conditions}
         offersList={offersList}
+        conditions={conditions}
+        onCreate={this.onCreateRule}
         onChange={this.changeRule}
         onDelete={this.deleteRule}
       />
