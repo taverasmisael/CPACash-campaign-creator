@@ -5,25 +5,17 @@ import { titleCase } from 'change-case'
 import { v4 as uuid } from 'uuid'
 
 import Divider from 'material-ui/Divider'
-import Typography from 'material-ui/Typography'
-import DeleteIcon from 'material-ui-icons/Delete'
 
 import ConditionsContainer from '../../containers/ConditionsContainer'
 import OffersContainer from '../../containers/OffersContainer'
-import Button from 'material-ui/Button'
-import Grid from 'material-ui/Grid'
-
-import withStyles from 'material-ui/styles/withStyles'
-import styles from './styles'
 
 class Rule extends PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
     conditions: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
     offersList: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func
   }
 
   static defaultProps = {
@@ -34,19 +26,25 @@ class Rule extends PureComponent {
   createCondition = type => {
     if (!this.conditionExist(type)) {
       const id = uuid()
-      this.setState(state => ({
-        activeConditions: [
-          ...state.activeConditions,
-          { id, conditionName: titleCase(type), conditionKey: type, mode: true, value: [] }
-        ]
-      }), this.onChange)
+      this.setState(
+        state => ({
+          activeConditions: [
+            ...state.activeConditions,
+            { id, conditionName: titleCase(type), conditionKey: type, mode: true, value: [] }
+          ]
+        }),
+        this.onChange
+      )
     }
   }
   createOffer = () =>
-    this.setState(state => ({
-      ...state,
-      activeOffers: [...state.activeOffers, { value: '0', weight: '15', id: uuid() }]
-    }), this.onChange)
+    this.setState(
+      state => ({
+        ...state,
+        activeOffers: [...state.activeOffers, { value: '0', weight: '15', id: uuid() }]
+      }),
+      this.onChange
+    )
   onDeleteCondition = id => {
     const activeConditions = this.state.activeConditions.filter(c => c.id !== id)
     this.setState({ activeConditions }, this.onChange)
@@ -69,25 +67,9 @@ class Rule extends PureComponent {
     this.setState({ activeOffers, activeConditions })
   }
   render() {
-    const { conditions, offersList, classes, id, onDelete, activeConditions, activeOffers  } = this.props
+    const { conditions, offersList, activeConditions, activeOffers } = this.props
     return (
-      <Fragment>
-        <Grid container spacing={16}>
-          <Grid item xs={10}>
-            <Typography variant="title" paragraph gutterBottom>
-              Rule {id}
-            </Typography>
-          </Grid>
-          <Grid item xs={2} className={classes.deleteButtonContainer}>
-            <Button
-              variant="raised"
-              onClick={onDelete}
-              classes={{ root: classes.deleteButtonRoot, raised: classes.deleteButtonRaised }}
-            >
-              <DeleteIcon className={classes.deleteButtonIcon} /> Rule
-            </Button>
-          </Grid>
-        </Grid>
+      <div style={{ width: '100%' }}>
         <ConditionsContainer
           conditionExist={this.conditionExist}
           onDelete={this.onDeleteCondition}
@@ -95,7 +77,7 @@ class Rule extends PureComponent {
           conditions={conditions}
           activeConditions={activeConditions}
         />
-        <Divider />
+        <Divider light />
         <OffersContainer
           offers={offersList}
           activeOffers={activeOffers}
@@ -103,9 +85,9 @@ class Rule extends PureComponent {
           onChange={this.handleOfferChange}
           onDelete={this.onDeleteOffer}
         />
-      </Fragment>
+      </div>
     )
   }
 }
 
-export default withStyles(styles)(Rule)
+export default Rule
