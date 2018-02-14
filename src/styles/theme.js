@@ -41,11 +41,6 @@ const Theme = createMuiTheme({
         }
       }
     },
-    MuiFormLabel: {
-      root: {
-        fontSize: '1.25rem'
-      }
-    },
     MuiChip: {
       root: {
         margin: DEFAULT_SPACING / 4
@@ -57,9 +52,9 @@ const Theme = createMuiTheme({
         marginLeft: DEFAULT_SPACING
       }
     },
-    MuiGrid: {
-      typeContainer: {
-        padding: DEFAULT_SPACING * 2
+    MuiExpansionPanelDetails: {
+      root: {
+        background: '#fafafa'
       }
     }
   }
