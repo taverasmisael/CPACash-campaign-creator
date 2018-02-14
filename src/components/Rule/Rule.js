@@ -75,7 +75,7 @@ class Rule extends PureComponent {
         <Grid container spacing={16}>
           <Grid item xs={10}>
             <Typography variant="title" paragraph gutterBottom>
-              Rule #{id}
+              Rule {id}
             </Typography>
           </Grid>
           <Grid item xs={2} className={classes.deleteButtonContainer}>

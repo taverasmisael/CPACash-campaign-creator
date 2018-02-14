@@ -26,33 +26,30 @@ class App extends PureComponent {
       { id: '2', value: 'Oferta Random 2' },
       { id: '3', value: 'Oferta Random 3' }
     ],
-    rules: {
-      0: {
-        id: '0',
+    rules: [
+      {
+        id: uuid(),
         activeConditions: [
           { id: uuid(), conditionName: 'Device', conditionKey: 'devices', mode: true, value: ['20', '30'] }
         ],
         activeOffers: [{ value: '0', weight: '15', id: uuid() }]
       },
-      1: {
-        id: '1',
+      {
+        id: uuid(),
         activeConditions: [
           { id: uuid(), conditionName: 'Country', conditionKey: 'countries', mode: true, value: ['1', '3'] }
         ],
         activeOffers: [{ value: '0', weight: '15', id: uuid() }]
       }
-    }
+    ]
   }
 
   deleteRule = id => {
-    const stateRules = this.state.rules
-    const rules = Object.keys(stateRules)
-      .filter(k => k !== id)
-      .reduce((p, c) => ({ ...p, [c]: { ...stateRules[c] } }), {})
+    const rules = this.state.rules.filter(r => r.id !== id)
     this.setState({ rules })
   }
   changeRule = ({ id, changes }) => {
-    const rules = { ...this.state.rules, [id]: { ...changes, id } }
+    const rules = this.state.rules.map(r => (r.id === id ? { ...r, ...changes } : r))
     this.setState({ rules })
   }
   render() {

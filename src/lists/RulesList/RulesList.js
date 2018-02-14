@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import compare from 'just-compare'
-
 import EmptyContainer from '../../HOCs/EmptyContainer'
 import Rule from '../../components/Rule'
+
+const RuleShape = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  activeConditions: PropTypes.array.isRequired,
+  activeOffers: PropTypes.array.isRequired
+})
 
 class RulesList extends PureComponent {
   state = {
@@ -14,7 +18,7 @@ class RulesList extends PureComponent {
     ...EmptyContainer.propTypes,
     conditions: PropTypes.any.isRequired,
     offersList: PropTypes.any.isRequired,
-    rules: PropTypes.object.isRequired
+    rules: PropTypes.arrayOf(RuleShape).isRequired
   }
   static defaultProps = {
     rules: {}
@@ -35,20 +39,8 @@ class RulesList extends PureComponent {
     />
   )
 
-  componentWillReceiveProps(nextProps) {
-    if (!compare(nextProps.rules, this.props.rules)) {
-      const rulesKeys = Object.keys(nextProps.rules)
-      this.setState({ rulesKeys })
-    }
-  }
-
-  componentDidMount() {
-    const rulesKeys = Object.keys(this.props.rules)
-    this.setState({ rulesKeys })
-  }
   render() {
-    const { rulesKeys } = this.state
-    return rulesKeys.map(k => this.props.rules[k]).map(this.renderRule)
+    return this.props.rules.map(this.renderRule)
   }
 }
 
