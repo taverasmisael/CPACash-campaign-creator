@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.3.0...v0.4.0) (2018-02-14)
+
+
+### Features
+
+* **Containers:** create a global container and implement it ([9eee2a6](https://github.com/taverasmisael/CPACash-campaign-creator/commit/9eee2a6))
+* **DeleteButton:** create component. Use it for delete rules ([7781f45](https://github.com/taverasmisael/CPACash-campaign-creator/commit/7781f45))
+* **Rule:** create/implementecomponent. Test save state to localStorage ([9881547](https://github.com/taverasmisael/CPACash-campaign-creator/commit/9881547))
+* **RulesContainer:** use ep instead of the traditional mapper ([f77b030](https://github.com/taverasmisael/CPACash-campaign-creator/commit/f77b030))
+* **RulesList:** create and implement component ([60080e7](https://github.com/taverasmisael/CPACash-campaign-creator/commit/60080e7))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.2.0...v0.3.0) (2018-02-13)
 
