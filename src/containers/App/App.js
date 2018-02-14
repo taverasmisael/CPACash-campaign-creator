@@ -1,7 +1,7 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 
-import Rule from '../../components/Rule/Rule'
 import { v4 as uuid } from 'uuid'
+import RulesList from '../../lists/RulesList'
 
 class App extends PureComponent {
   state = {
@@ -33,45 +33,40 @@ class App extends PureComponent {
           { id: uuid(), conditionName: 'Device', conditionKey: 'devices', mode: true, value: ['20', '30'] }
         ],
         activeOffers: [{ value: '0', weight: '15', id: uuid() }]
+      },
+      1: {
+        id: '1',
+        activeConditions: [
+          { id: uuid(), conditionName: 'Country', conditionKey: 'countries', mode: true, value: ['1', '3'] }
+        ],
+        activeOffers: [{ value: '0', weight: '15', id: uuid() }]
       }
     }
   }
-  deleteRule = id => () => {
+
+  deleteRule = id => {
     const stateRules = this.state.rules
     const rules = Object.keys(stateRules)
       .filter(k => k !== id)
-      .map(k => stateRules[k])
+      .reduce((p, c) => ({ ...p, [c]: { ...stateRules[c] } }), {})
     this.setState({ rules })
   }
-  onChangeRule = id => changes => {
-    const stateRules = this.state.rules
-    const rules = Object.keys(stateRules).map(k => (k === id ? { ...stateRules[k], ...changes } : stateRules[k]))
-    this.setState({ rules }, () => localStorage.setItem('rules', JSON.stringify(this.state.rules)))
-  }
-
-  componentWillMount() {
-    const rules = JSON.parse(localStorage.getItem('rules'))
-    console.log(rules)
-    if (rules) this.setState({ rules })
+  changeRule = ({ id, changes }) => {
+    const rules = { ...this.state.rules, [id]: { ...changes, id } }
+    this.setState({ rules })
   }
   render() {
-    const rule = this.state.rules[0]
+    const { rules, conditions, offersList } = this.state
     return (
-      <Fragment>
-        {rule ? (
-          <Rule
-            id={rule.id}
-            conditions={this.state.conditions}
-            offersList={this.state.offersList}
-            activeOffers={rule.activeOffers}
-            activeConditions={rule.activeConditions}
-            onDelete={this.deleteRule('0')}
-            onChange={this.onChangeRule('0')}
-          />
-        ) : (
-          <div />
-        )}
-      </Fragment>
+      <RulesList
+        isEmpty={!Object.keys(rules).length}
+        emptyMessage="Add some rules"
+        rules={rules}
+        conditions={conditions}
+        offersList={offersList}
+        onChange={this.changeRule}
+        onDelete={this.deleteRule}
+      />
     )
   }
 }
