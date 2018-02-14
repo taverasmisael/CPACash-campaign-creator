@@ -41,7 +41,7 @@ class Condition extends PureComponent {
     return (
       <Grid container spacing={16} alignItems="center">
         <Grid item xs={12} sm={6} md={3}>
-          <Typography variant="title">{conditionName}</Typography>
+          <Typography variant="body2">{conditionName}</Typography>
           <FormControlLabel control={<Checkbox checked={mode} onChange={this.onModeChange} />} label={switchText} />
         </Grid>
         <Grid item xs={10} sm={6} md={9}>

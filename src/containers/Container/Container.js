@@ -9,7 +9,7 @@ import styles from './styles'
 
 const Container = ({ classes, title, ListComponent, listProps, onCreate, createText, CustomCreator }) => (
   <div className={classes.wrapper}>
-    <Typography variant="headline" gutterBottom>
+    <Typography variant="subheading" gutterBottom>
       {title}
     </Typography>
     <div className={classes.containerList}>
@@ -18,7 +18,7 @@ const Container = ({ classes, title, ListComponent, listProps, onCreate, createT
     {CustomCreator ? (
       <CustomCreator />
     ) : (
-      <Button aria-haspopup="true" onClick={onCreate}>
+      <Button aria-haspopup="true" onClick={onCreate} size="small" color="secondary">
         {createText}
       </Button>
     )}
