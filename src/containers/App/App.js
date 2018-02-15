@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 
 import { v4 as uuid } from 'uuid'
-import RulesContainer from '../RulesContainer'
+import CampaignSettings from '../../components/CampaignSettings'
+
 class App extends PureComponent {
   state = {
     conditions: {
@@ -19,12 +20,21 @@ class App extends PureComponent {
         5: { id: '5', value: 'Emotion' }
       }
     },
+    verticalsList: [
+      { id: '0', value: 'Mainstrean', subverticals: [{ id: '0', value: 'Game' }] },
+      { id: '1', value: 'Adults', subverticals: [{ id: '0', value: 'Dating' }, { id: '1', value: 'Videos' }] }
+    ],
     offersList: [
       { id: '0', value: 'Oferta Random' },
       { id: '1', value: 'Oferta Random 1' },
       { id: '2', value: 'Oferta Random 2' },
       { id: '3', value: 'Oferta Random 3' }
     ],
+    campaign: {
+      name: '',
+      vertical: '',
+      subvertical: ''
+    },
     rules: [
       {
         id: uuid(),
@@ -51,18 +61,18 @@ class App extends PureComponent {
     const rules = this.state.rules.map(r => (r.id === id ? { ...r, ...changes } : r))
     this.setState({ rules })
   }
+
+  onChangeCampaignSettings = ({ target: { name, value } }) =>
+    this.setState(state => ({ campaign: { ...state.campaign, [name]: value } }))
   onCreateRule = () =>
     this.setState(state => ({ rules: [...state.rules, { id: uuid(), activeConditions: [], activeOffers: [] }] }))
   render() {
-    const { rules, conditions, offersList } = this.state
+    const { name, vertical, subvertical } = this.state.campaign
     return (
-      <RulesContainer
-        rules={rules}
-        offersList={offersList}
-        conditions={conditions}
-        onCreate={this.onCreateRule}
-        onChange={this.changeRule}
-        onDelete={this.deleteRule}
+      <CampaignSettings
+        {...{ name, vertical, subvertical }}
+        verticalsList={this.state.verticalsList}
+        onChange={this.onChangeCampaignSettings}
       />
     )
   }
