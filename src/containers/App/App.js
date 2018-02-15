@@ -32,14 +32,13 @@ class App extends PureComponent {
       { id: '2', value: 'Oferta Random 2' },
       { id: '3', value: 'Oferta Random 3' }
     ],
+    canSave: false,
     campaign: {
       name: '',
       vertical: '',
       subvertical: ''
     },
-    defaultOffers: {
-      activeOffers: []
-    },
+    defaultOffers: [],
     rules: [
       {
         id: uuid(),
@@ -67,8 +66,16 @@ class App extends PureComponent {
     this.setState({ rules })
   }
 
+  canSaveCampaign = () =>
+    this.setState(state => {
+      const { campaign, defaultOffers } = state
+      console.log('object')
+      const canSave = Boolean(campaign.name && campaign.vertical && campaign.subvertical && defaultOffers.length)
+      return { canSave }
+    })
+
   onChangeCampaignSettings = ({ target: { name, value } }) =>
-    this.setState(state => ({ campaign: { ...state.campaign, [name]: value } }))
+    this.setState(state => ({ campaign: { ...state.campaign, [name]: value } }), this.canSaveCampaign)
   onCreateRule = () =>
     this.setState(state => ({ rules: [...state.rules, { id: uuid(), activeConditions: [], activeOffers: [] }] }))
 
@@ -80,20 +87,19 @@ class App extends PureComponent {
 
   render() {
     const { name, vertical, subvertical } = this.state.campaign
-    const { rules, offersList, conditions, defaultOffers } = this.state
+    const { rules, offersList, conditions, defaultOffers, canSave } = this.state
     return (
       <Fragment>
         <CampaignSettings
-          {...{ name, vertical, subvertical }}
+          name={name}
+          vertical={vertical}
+          subvertical={subvertical}
+          canSave={canSave}
           verticalsList={this.state.verticalsList}
           onChange={this.onChangeCampaignSettings}
           onSave={this.onSaveCampaign}
         />
-        <DefaultCondition
-          offers={offersList}
-          activeOffers={defaultOffers.activeOffers}
-          onChange={this.onChangeDefaultOffers}
-        />
+        <DefaultCondition offers={offersList} activeOffers={defaultOffers} onChange={this.onChangeDefaultOffers} />
         <RulesContainer
           rules={rules}
           offersList={offersList}

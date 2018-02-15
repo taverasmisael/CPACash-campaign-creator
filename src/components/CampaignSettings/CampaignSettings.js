@@ -13,6 +13,7 @@ import styles from './styles'
 
 class CampaignSettings extends PureComponent {
   static propTypes = {
+    canSave: PropTypes.bool,
     classes: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
     vertical: PropTypes.string.isRequired,
@@ -23,7 +24,8 @@ class CampaignSettings extends PureComponent {
   }
 
   static defaultProps = {
-    verticalsList: []
+    verticalsList: [],
+    canSave: false
   }
 
   state = {
@@ -37,7 +39,7 @@ class CampaignSettings extends PureComponent {
     this.props.onChange(event)
   }
   render() {
-    const { classes, name, vertical, subvertical, verticalsList, onChange, onSave } = this.props
+    const { classes, name, vertical, subvertical, verticalsList, onChange, onSave, canSave } = this.props
     const { subverticals } = this.state
     return (
       <Paper elevation={1} className={classes.container}>
@@ -93,7 +95,14 @@ class CampaignSettings extends PureComponent {
             </TextField>
           </Grid>
           <Grid item xs={12} sm={3} md={2}>
-            <Button variant="raised" fullWidth color="primary" className={classes.submitButton} onClick={onSave}>
+            <Button
+              variant="raised"
+              disabled={!canSave}
+              fullWidth
+              color="primary"
+              className={classes.submitButton}
+              onClick={onSave}
+            >
               Save
             </Button>
           </Grid>

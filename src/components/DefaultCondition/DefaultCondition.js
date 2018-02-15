@@ -43,7 +43,7 @@ class DefaultCondition extends PureComponent {
 
   onChange = () => {
     const { activeOffers } = this.state
-    this.props.onChange({ activeOffers })
+    this.props.onChange(activeOffers)
   }
   componentDidMount() {
     const activeOffers = this.props.activeOffers
