@@ -52,10 +52,7 @@ class App extends PureComponent {
     this.setState({ rules })
   }
   onCreateRule = () =>
-    this.setState(state => ({
-      ...state,
-      rules: [...state.rules, { id: uuid(), activeConditions: [], activeOffers: [] }]
-    }))
+    this.setState(state => ({ rules: [...state.rules, { id: uuid(), activeConditions: [], activeOffers: [] }] }))
   render() {
     const { rules, conditions, offersList } = this.state
     return (
