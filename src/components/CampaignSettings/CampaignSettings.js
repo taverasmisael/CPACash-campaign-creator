@@ -40,7 +40,7 @@ class CampaignSettings extends PureComponent {
     const { classes, name, vertical, subvertical, verticalsList, onChange, onSave } = this.props
     const { subverticals } = this.state
     return (
-      <Paper elevation={4} className={classes.container}>
+      <Paper elevation={1} className={classes.container}>
         <Typography variant="headline" align="center" component="h1" gutterBottom>
           Campaign Link Creator
         </Typography>
