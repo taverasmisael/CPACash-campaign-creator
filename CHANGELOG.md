@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.5.1...v0.6.0) (2018-02-15)
+
+
+### Bug Fixes
+
+* **style:** elevatin in CampaignSettings ([8455c18](https://github.com/taverasmisael/CPACash-campaign-creator/commit/8455c18))
+
+
+### Features
+
+* **CampaignSettings:** add onSave prop ([a63bbe1](https://github.com/taverasmisael/CPACash-campaign-creator/commit/a63bbe1))
+* **CampaignSettings:** complete functionality and styles ([5dc3f0f](https://github.com/taverasmisael/CPACash-campaign-creator/commit/5dc3f0f))
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.5.0...v0.5.1) (2018-02-15)
 
