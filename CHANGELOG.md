@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.6.0...v0.7.0) (2018-02-15)
+
+
+### Features
+
+* **canSave:** add condition to activate save buttn ([cd782be](https://github.com/taverasmisael/CPACash-campaign-creator/commit/cd782be))
+* **DefaultCondition:** create functionality and styles ([1f1b3e9](https://github.com/taverasmisael/CPACash-campaign-creator/commit/1f1b3e9))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.5.1...v0.6.0) (2018-02-15)
 
