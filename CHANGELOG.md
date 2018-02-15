@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.5.0...v0.5.1) (2018-02-15)
+
+
+### Bug Fixes
+
+* **state:** close RuleLists and fix setState in App ([2004f5c](https://github.com/taverasmisael/CPACash-campaign-creator/commit/2004f5c))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.4.0...v0.5.0) (2018-02-15)
 
