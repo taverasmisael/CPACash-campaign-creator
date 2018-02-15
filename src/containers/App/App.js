@@ -3,7 +3,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { v4 as uuid } from 'uuid'
 import CampaignSettings from '../../components/CampaignSettings'
 import RulesContainer from '../RulesContainer'
-import DefaultCondition from '../../components/DefaultCondition'
+import DefaultRule from '../../components/DefaultRule'
 
 class App extends PureComponent {
   state = {
@@ -69,7 +69,6 @@ class App extends PureComponent {
   canSaveCampaign = () =>
     this.setState(state => {
       const { campaign, defaultOffers } = state
-      console.log('object')
       const canSave = Boolean(campaign.name && campaign.vertical && campaign.subvertical && defaultOffers.length)
       return { canSave }
     })
@@ -99,7 +98,7 @@ class App extends PureComponent {
           onChange={this.onChangeCampaignSettings}
           onSave={this.onSaveCampaign}
         />
-        <DefaultCondition offers={offersList} activeOffers={defaultOffers} onChange={this.onChangeDefaultOffers} />
+        <DefaultRule offers={offersList} activeOffers={defaultOffers} onChange={this.onChangeDefaultOffers} />
         <RulesContainer
           rules={rules}
           offersList={offersList}

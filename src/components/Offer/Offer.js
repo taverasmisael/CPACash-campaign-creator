@@ -38,7 +38,7 @@ const Offer = ({ offersList = [], value = '', weight = 100, id, onChange, onDele
             required
             type="number"
             name="weight"
-            label="Offer Weight"
+            label="Offer Weight (%)"
             id={`OfferWeight-${id}`}
             value={weight}
             InputLabelProps={{ shrink: true }}

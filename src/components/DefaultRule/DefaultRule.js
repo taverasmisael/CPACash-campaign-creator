@@ -11,7 +11,7 @@ import OffersContainer from '../../containers/OffersContainer'
 import withStyles from 'material-ui/styles/withStyles'
 import styles from './styles'
 
-class DefaultCondition extends PureComponent {
+class DefaultRule extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     activeOffers: PropTypes.array.isRequired,
@@ -55,7 +55,7 @@ class DefaultCondition extends PureComponent {
     return (
       <Paper elevation={1} className={classes.container}>
         <Typography variant="title" component="h2" gutterBottom paragraph>
-          Default Offers
+          Default Rule
         </Typography>
         <OffersContainer
           activeOffers={activeOffers}
@@ -69,4 +69,4 @@ class DefaultCondition extends PureComponent {
   }
 }
 
-export default withStyles(styles)(DefaultCondition)
+export default withStyles(styles)(DefaultRule)
