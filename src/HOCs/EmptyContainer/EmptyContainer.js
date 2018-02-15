@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Typography from 'material-ui/Typography'
 
 const EmptyMessage = ({ message }) => (
-  <Typography variant="subheading" gutterBottom align="center">
+  <Typography variant="subheading" gutterBottom align="center" component="p">
     {message}
   </Typography>
 )

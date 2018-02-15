@@ -9,7 +9,7 @@ import styles from './styles'
 
 const Container = ({ classes, title, ListComponent, listProps, onCreate, createText, CustomCreator }) => (
   <div className={classes.wrapper}>
-    <Typography variant="subheading" gutterBottom>
+    <Typography variant="subheading" gutterBottom component="h4">
       {title}
     </Typography>
     <div className={classes.containerList}>

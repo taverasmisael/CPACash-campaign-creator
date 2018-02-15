@@ -20,6 +20,16 @@ const RuleShape = PropTypes.shape({
   activeOffers: PropTypes.array.isRequired
 })
 
+const ExpansionPanelSummaryColumnPrimaryStyles = {
+  flexBasis: '75%',
+  display: 'flex',
+  alignItems: 'center'
+}
+const ExpansionPanelSummaryColumnSecondarStyles = {
+  display: 'flex',
+  alignItems: 'center',
+  flexBasis: '33%'
+}
 class RulesList extends PureComponent {
   state = {
     rulesKeys: []
@@ -41,10 +51,16 @@ class RulesList extends PureComponent {
   renderRule = ({ id, activeOffers, activeConditions }) => (
     <ExpansionPanel key={id}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant="title" paragraph gutterBottom>
-          Rule {id.slice(0, 6)}
-        </Typography>
+        <div style={ExpansionPanelSummaryColumnPrimaryStyles}>
+          <Typography variant="title" component="h3">
+            Rule {id.slice(0, 6)}
+          </Typography>
+        </div>
+        <div style={ExpansionPanelSummaryColumnSecondarStyles}>
+          <DeleteButton onClick={this.handleDelete(id)}>Delete Rule</DeleteButton>
+        </div>
       </ExpansionPanelSummary>
+
       <ExpansionPanelDetails>
         <Rule
           id={id}
@@ -59,7 +75,9 @@ class RulesList extends PureComponent {
       </ExpansionPanelDetails>
       <Divider />
       <ExpansionPanelActions>
-        <DeleteButton onClick={this.handleDelete(id)} variant="raised">Delete Rule</DeleteButton>
+        <DeleteButton onClick={this.handleDelete(id)} variant="raised">
+          Delete Rule
+        </DeleteButton>
       </ExpansionPanelActions>
     </ExpansionPanel>
   )

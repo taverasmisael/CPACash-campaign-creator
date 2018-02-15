@@ -61,6 +61,11 @@ const Theme = createMuiTheme({
       expanded: {
         boxShadow: '0 2px #f5f5f5'
       }
+    },
+    MuiTypography: {
+      title: {
+        fontWeight: 'normal'
+      }
     }
   }
 })

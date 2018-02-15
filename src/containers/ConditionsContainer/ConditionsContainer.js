@@ -57,6 +57,7 @@ class ConditionsContainer extends PureComponent {
       <Fragment>
         <Button
           color="secondary"
+          size="small"
           aria-haspopup="true"
           onClick={this.openAddMenu}
           aria-owns={anchorEl ? 'simple-menu' : null}

@@ -16,7 +16,7 @@ import styles from './styles'
 const Condition = ({ conditionsList = [], value, mode, classes, conditionName, onDelete, onChange }) => (
   <Grid container spacing={16}>
     <Grid item xs={8} sm={5} md={2} className={`${classes.item} ${classes.itemWithMargin}`}>
-      <Typography variant="body2" gutterBottom>
+      <Typography variant="body2" gutterBottom component="p">
         {conditionName}
       </Typography>
     </Grid>
