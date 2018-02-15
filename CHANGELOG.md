@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.7.1...v0.8.0) (2018-02-15)
+
+
+### Features
+
+* **FileExtensions:** use jsx for components ([ad248a3](https://github.com/taverasmisael/CPACash-campaign-creator/commit/ad248a3))
+* **Loading:** create loading component and implement it ([1a65a2d](https://github.com/taverasmisael/CPACash-campaign-creator/commit/1a65a2d))
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.7.0...v0.7.1) (2018-02-15)
 
