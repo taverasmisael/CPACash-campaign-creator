@@ -39,7 +39,7 @@ class RulesList extends PureComponent {
   handleDelete = id => () => this.props.onDelete(id)
   hanndleChange = id => changes => this.props.onChange({ id, changes })
   renderRule = ({ id, activeOffers, activeConditions }) => (
-    <ExpansionPanel key={id}>
+    <ExpansionPanel key={id} expanded>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant="title" paragraph gutterBottom>
           Rule {id.slice(0, 6)}

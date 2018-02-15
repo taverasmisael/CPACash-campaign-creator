@@ -45,24 +45,23 @@ class Rule extends PureComponent {
       }),
       this.onChange
     )
-  onDeleteCondition = id => {
-    const activeConditions = this.state.activeConditions.filter(c => c.id !== id)
-    this.setState({ activeConditions }, this.onChange)
+
+  handleDeletion = slice => id => {
+    this.setState(state => ({ [slice]: state[slice].filter(v => v.id !== id) }), this.onChange)
   }
-  onDeleteOffer = id => {
-    const activeOffers = this.state.activeOffers.filter(o => o.id !== id)
-    this.setState({ activeOffers }, this.onChange)
-  }
-  handleOfferChange = ({ id, name, value }) => {
-    const activeOffers = this.state.activeOffers.map(o => (o.id === id ? { ...o, [name]: value } : o))
-    this.setState({ activeOffers }, this.onChange)
+
+  handleChange = slice => ({ id, name, value }) => {
+    this.setState(
+      state => ({ [slice]: state[slice].map(v => (v.id === id ? { ...v, [name]: value } : v)) }),
+      this.onChange
+    )
   }
   onChange = () => {
     const { activeOffers, activeConditions } = this.state
     this.props.onChange({ activeOffers, activeConditions })
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { activeOffers, activeConditions } = this.props
     this.setState({ activeOffers, activeConditions })
   }
@@ -72,18 +71,19 @@ class Rule extends PureComponent {
       <div style={{ width: '100%' }}>
         <ConditionsContainer
           conditionExist={this.conditionExist}
-          onDelete={this.onDeleteCondition}
+          onDelete={this.handleDeletion('activeConditions')}
           onCreateCondition={this.createCondition}
           conditions={conditions}
           activeConditions={activeConditions}
+          onChange={this.handleChange('activeConditions')}
         />
         <Divider light />
         <OffersContainer
           offers={offersList}
           activeOffers={activeOffers}
           onCreate={this.createOffer}
-          onChange={this.handleOfferChange}
-          onDelete={this.onDeleteOffer}
+          onChange={this.handleChange('activeOffers')}
+          onDelete={this.handleDeletion('activeOffers')}
         />
       </div>
     )

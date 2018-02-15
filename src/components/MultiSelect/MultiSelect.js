@@ -33,6 +33,7 @@ class MultiSelect extends PureComponent {
           onChange={onChange}
           input={<Input id="select-multiple-chip" placeholder={placeholder} />}
           renderValue={selected => selected.map(s => list[s].value).join(', ')}
+          {...props}
         >
           {SelectItems({ value: value, items: list })}
         </Select>

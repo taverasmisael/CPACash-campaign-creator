@@ -23,7 +23,8 @@ class ConditionsContainer extends PureComponent {
     conditions: PropTypes.object.isRequired,
     activeConditions: PropTypes.arrayOf(ConditionShape),
     onCreateCondition: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
   }
 
   state = { anchorEl: null, activeConditionsKeys: [] }
@@ -43,7 +44,7 @@ class ConditionsContainer extends PureComponent {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       activeConditionsKeys: this.props.activeConditions.map(c => c.conditionKey)
     })
@@ -74,16 +75,17 @@ class ConditionsContainer extends PureComponent {
   }
 
   render() {
-    const { conditions, activeConditions, onDelete } = this.props
+    const { conditions, activeConditions, onDelete, onChange } = this.props
     return (
       <Container
         ListComponent={ConditionsList}
         listProps={{
+          onChange,
+          onDelete,
+          conditions,
           emptyMessage: 'There are no conditions in this rule. Please add a condition using the button down below',
           isEmpty: !activeConditions.length,
-          onDelete: onDelete,
-          conditions: conditions,
-          activeConditions: activeConditions
+          activeConditions: activeConditions,
         }}
         CustomCreator={this.creator}
         title="Conditions"

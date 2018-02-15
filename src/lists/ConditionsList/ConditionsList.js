@@ -16,7 +16,8 @@ class ConditionsList extends PureComponent {
     ...EmptyContainer.propTypes,
     conditions: PropTypes.object.isRequired,
     activeConditions: PropTypes.arrayOf(ConditionShape),
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -24,19 +25,25 @@ class ConditionsList extends PureComponent {
     activeConditions: {}
   }
   handleDelete = id => () => this.props.onDelete(id)
+
+  handleChange = id => ({ target: { name, value } }, checked) =>
+    this.props.onChange({ id, name, value: checked !== undefined ? checked : value })
+
+  renderCondition = condition => (
+    <Condition
+      key={condition.id}
+      id={condition.id}
+      mode={condition.mode}
+      value={condition.value}
+      conditionName={condition.conditionName}
+      conditionsList={this.props.conditions[condition.conditionKey]}
+      onDelete={this.handleDelete(condition.id)}
+      onChange={this.handleChange(condition.id)}
+    />
+  )
   render() {
-    const { activeConditions, conditions } = this.props
-    return activeConditions.map(condition => (
-      <Condition
-        key={condition.id}
-        id={condition.id}
-        mode={condition.mode}
-        value={condition.value}
-        conditionName={condition.conditionName}
-        conditionsList={conditions[condition.conditionKey]}
-        onDelete={this.handleDelete(condition.id)}
-      />
-    ))
+    const { activeConditions } = this.props
+    return activeConditions.map(this.renderCondition)
   }
 }
 
