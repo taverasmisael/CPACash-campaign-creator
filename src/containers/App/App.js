@@ -3,6 +3,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { v4 as uuid } from 'uuid'
 import CampaignSettings from '../../components/CampaignSettings'
 import RulesContainer from '../RulesContainer'
+import DefaultCondition from '../../components/DefaultCondition'
 
 class App extends PureComponent {
   state = {
@@ -36,6 +37,9 @@ class App extends PureComponent {
       vertical: '',
       subvertical: ''
     },
+    defaultOffers: {
+      activeOffers: []
+    },
     rules: [
       {
         id: uuid(),
@@ -68,12 +72,15 @@ class App extends PureComponent {
   onCreateRule = () =>
     this.setState(state => ({ rules: [...state.rules, { id: uuid(), activeConditions: [], activeOffers: [] }] }))
 
-  onSaveCampaign = event => {
-    console.log('onSave')
-  }
+  onSaveCampaign = event => console.log('onSave', this.state)
+
+  onCreateDefaultOffer = () => true
+
+  onChangeDefaultOffers = defaultOffers => this.setState({ defaultOffers })
+
   render() {
     const { name, vertical, subvertical } = this.state.campaign
-    const { rules, offersList, conditions } = this.state
+    const { rules, offersList, conditions, defaultOffers } = this.state
     return (
       <Fragment>
         <CampaignSettings
@@ -81,6 +88,11 @@ class App extends PureComponent {
           verticalsList={this.state.verticalsList}
           onChange={this.onChangeCampaignSettings}
           onSave={this.onSaveCampaign}
+        />
+        <DefaultCondition
+          offers={offersList}
+          activeOffers={defaultOffers.activeOffers}
+          onChange={this.onChangeDefaultOffers}
         />
         <RulesContainer
           rules={rules}
