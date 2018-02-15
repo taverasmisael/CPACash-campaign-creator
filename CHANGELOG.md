@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.4.0...v0.5.0) (2018-02-15)
+
+
+### Bug Fixes
+
+* **styles:** adjust styles for Condition and EP ([1d5cdbb](https://github.com/taverasmisael/CPACash-campaign-creator/commit/1d5cdbb))
+* **styles:** grid container spacing and epDetails background ([6fe2291](https://github.com/taverasmisael/CPACash-campaign-creator/commit/6fe2291))
+
+
+### Features
+
+* **Conditions:** lift up the state to the rule ([d854c97](https://github.com/taverasmisael/CPACash-campaign-creator/commit/d854c97))
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.3.0...v0.4.0) (2018-02-14)
 
