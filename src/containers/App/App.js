@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 
 import { v4 as uuid } from 'uuid'
 import CampaignSettings from '../../components/CampaignSettings'
+import RulesContainer from '../RulesContainer'
 
 class App extends PureComponent {
   state = {
@@ -57,7 +58,7 @@ class App extends PureComponent {
     const rules = this.state.rules.filter(r => r.id !== id)
     this.setState({ rules })
   }
-  changeRule = ({ id, changes }) => {
+  onChangeRule = ({ id, changes }) => {
     const rules = this.state.rules.map(r => (r.id === id ? { ...r, ...changes } : r))
     this.setState({ rules })
   }
@@ -66,14 +67,30 @@ class App extends PureComponent {
     this.setState(state => ({ campaign: { ...state.campaign, [name]: value } }))
   onCreateRule = () =>
     this.setState(state => ({ rules: [...state.rules, { id: uuid(), activeConditions: [], activeOffers: [] }] }))
+
+  onSaveCampaign = event => {
+    console.log('onSave')
+  }
   render() {
     const { name, vertical, subvertical } = this.state.campaign
+    const { rules, offersList, conditions } = this.state
     return (
-      <CampaignSettings
-        {...{ name, vertical, subvertical }}
-        verticalsList={this.state.verticalsList}
-        onChange={this.onChangeCampaignSettings}
-      />
+      <Fragment>
+        <CampaignSettings
+          {...{ name, vertical, subvertical }}
+          verticalsList={this.state.verticalsList}
+          onChange={this.onChangeCampaignSettings}
+          onSave={this.onSaveCampaign}
+        />
+        <RulesContainer
+          rules={rules}
+          offersList={offersList}
+          conditions={conditions}
+          onDelete={this.deleteRule}
+          onChange={this.onChangeRule}
+          onCreate={this.onCreateRule}
+        />
+      </Fragment>
     )
   }
 }
