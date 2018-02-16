@@ -15,7 +15,7 @@ class Campaign extends PureComponent {
       name: PropTypes.string.isRequired,
       vertical: PropTypes.string.isRequired,
       subVertical: PropTypes.string.isRequired
-    }),
+    }).isRequired,
     defaultOffers: PropTypes.array,
     rues: PropTypes.array,
     offers: PropTypes.array,
@@ -62,9 +62,12 @@ class Campaign extends PureComponent {
 
   onSaveCampaign = () => this.props.onSave(this.state)
 
-  onCreateDefaultOffer = () => true
-
   onChangeDefaultOffers = defaultOffers => this.setState({ defaultOffers })
+
+  componentWillMount() {
+    const { campaign, defaultOffers = [], rules = [] } = this.props
+    this.setState({ campaign, defaultOffers, rules })
+  }
   render() {
     const { campaign: { name, vertical, subVertical }, canSave, defaultOffers, rules } = this.state
     const { offers, conditions, verticals } = this.props

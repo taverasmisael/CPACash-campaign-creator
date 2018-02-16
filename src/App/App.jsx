@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import Campaign from '../containers/Campaign/Campaign'
 
-import {GetInitialState} from '../services/initdata'
+import { GetInitialState } from '../services/initdata'
 
 class App extends PureComponent {
   state = {
@@ -14,15 +14,16 @@ class App extends PureComponent {
   saveCampaign = campaignInfo => console.log(campaignInfo)
   componentDidMount() {
     GetInitialState()
-      .then(res => this.setState({...res, loading: false}))
+      .then(res => this.setState({ ...res, loading: false }))
       .catch(console.error.bind(console))
   }
   render() {
-    const { offers, conditions, verticals, loading } = this.state
+    const { offers, conditions, verticals, loading, campaign } = this.state
     return (
       <Campaign
-        isLoading={loading}
         loadingMessage="Loading verticals and conditions"
+        isLoading={loading}
+        campaign={campaign}
         offers={offers}
         conditions={conditions}
         verticals={verticals}

@@ -32,11 +32,20 @@ class CampaignSettings extends PureComponent {
     subVerticals: []
   }
 
+  setSubVertical = id => {
+    console.log(id)
+    const subVerticals = this.props.verticalsList.find(v => v.id === id).subVerticals
+    this.setState({ subVerticals })
+  }
+
   handleVerticalChange = event => {
     const { target: { value } } = event
-    const subVerticals = this.props.verticalsList.find(v => v.id === value).subVerticals
-    this.setState({ subVerticals })
+    this.setSubVertical(value)
     this.props.onChange(event)
+  }
+
+  componentDidMount() {
+    if (this.props.vertical) this.setSubVertical(this.props.vertical)
   }
   render() {
     const { classes, name, vertical, subVertical, verticalsList, onChange, onSave, canSave } = this.props
