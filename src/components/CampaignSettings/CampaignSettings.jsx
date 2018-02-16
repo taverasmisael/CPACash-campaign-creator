@@ -29,18 +29,18 @@ class CampaignSettings extends PureComponent {
   }
 
   state = {
-    subverticals: []
+    subVerticals: []
   }
 
   handleVerticalChange = event => {
     const { target: { value } } = event
-    const subverticals = this.props.verticalsList.find(v => v.id === value).subverticals
-    this.setState({ subverticals })
+    const subVerticals = this.props.verticalsList.find(v => v.id === value).subVerticals
+    this.setState({ subVerticals })
     this.props.onChange(event)
   }
   render() {
     const { classes, name, vertical, subvertical, verticalsList, onChange, onSave, canSave } = this.props
-    const { subverticals } = this.state
+    const { subVerticals } = this.state
     return (
       <Paper elevation={1} className={classes.container}>
         <Typography variant="headline" align="center" component="h1" gutterBottom>
@@ -71,7 +71,7 @@ class CampaignSettings extends PureComponent {
             >
               {verticalsList.map(vertical => (
                 <MenuItem key={vertical.id} value={vertical.id}>
-                  {vertical.value}
+                  {vertical.text}
                 </MenuItem>
               ))}
             </TextField>
@@ -87,9 +87,9 @@ class CampaignSettings extends PureComponent {
               onChange={onChange}
               InputLabelProps={{ shrink: true }}
             >
-              {subverticals.map(vertical => (
+              {subVerticals.map(vertical => (
                 <MenuItem key={vertical.id} value={vertical.id}>
-                  {vertical.value}
+                  {vertical.text}
                 </MenuItem>
               ))}
             </TextField>

@@ -11,7 +11,7 @@ const SelectItems = ({ items = {}, value, ...props }) =>
     return (
       <MenuItem key={item.id} value={item.id} {...props}>
         <Checkbox checked={value.includes(item.id)} />
-        <ListItemText primary={item.value} />
+        <ListItemText primary={item.text} />
       </MenuItem>
     )
   })
