@@ -18,7 +18,7 @@ class CampaignSettings extends PureComponent {
     name: PropTypes.string.isRequired,
     vertical: PropTypes.string.isRequired,
     verticalsList: PropTypes.array.isRequired,
-    subvertical: PropTypes.string.isRequired,
+    subVertical: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired
   }
@@ -39,7 +39,7 @@ class CampaignSettings extends PureComponent {
     this.props.onChange(event)
   }
   render() {
-    const { classes, name, vertical, subvertical, verticalsList, onChange, onSave, canSave } = this.props
+    const { classes, name, vertical, subVertical, verticalsList, onChange, onSave, canSave } = this.props
     const { subVerticals } = this.state
     return (
       <Paper elevation={1} className={classes.container}>
@@ -80,10 +80,10 @@ class CampaignSettings extends PureComponent {
             <TextField
               select
               fullWidth
-              name="subvertical"
-              label="Subvertical"
-              placeholder="Campaign Subvertical"
-              value={subvertical}
+              name="subVertical"
+              label="Sub-vertical"
+              placeholder="Campaign subVertical"
+              value={subVertical}
               onChange={onChange}
               InputLabelProps={{ shrink: true }}
             >

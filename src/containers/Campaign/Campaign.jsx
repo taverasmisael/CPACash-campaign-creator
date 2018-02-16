@@ -14,7 +14,7 @@ class Campaign extends PureComponent {
     campaign: PropTypes.shape({
       name: PropTypes.string.isRequired,
       vertical: PropTypes.string.isRequired,
-      subvertical: PropTypes.string.isRequired
+      subVertical: PropTypes.string.isRequired
     }),
     defaultOffers: PropTypes.array,
     rues: PropTypes.array,
@@ -34,7 +34,7 @@ class Campaign extends PureComponent {
     campaign: {
       name: '',
       vertical: '',
-      subvertical: ''
+      subVertical: ''
     },
     defaultOffers: [],
     rules: []
@@ -51,7 +51,7 @@ class Campaign extends PureComponent {
   canSaveCampaign = () =>
     this.setState(state => {
       const { campaign, defaultOffers } = state
-      const canSave = Boolean(campaign.name && campaign.vertical && campaign.subvertical && defaultOffers.length)
+      const canSave = Boolean(campaign.name && campaign.vertical && campaign.subVertical && defaultOffers.length)
       return { canSave }
     })
 
@@ -66,14 +66,14 @@ class Campaign extends PureComponent {
 
   onChangeDefaultOffers = defaultOffers => this.setState({ defaultOffers })
   render() {
-    const { campaign: { name, vertical, subvertical }, canSave, defaultOffers, rules } = this.state
+    const { campaign: { name, vertical, subVertical }, canSave, defaultOffers, rules } = this.state
     const { offers, conditions, verticals } = this.props
     return (
       <Fragment>
         <CampaignSettings
           name={name}
           vertical={vertical}
-          subvertical={subvertical}
+          subVertical={subVertical}
           canSave={canSave}
           verticalsList={verticals}
           onChange={this.onChangeCampaignSettings}
