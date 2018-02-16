@@ -10,7 +10,7 @@ const RulesContainer = ({ rules, offersList, conditions, onDelete, onCreate, onC
     createText="Add Rule"
     ListComponent={RulesList}
     listProps={{
-      emptyMessage: 'There are rules 😱. Please add a rule using the button down below. (Default Rule will be used)',
+      emptyMessage: 'There are no rules. Please add a rule using the button down below. Default Rule will be used',
       isEmpty: !rules.length,
       rules,
       offersList,
