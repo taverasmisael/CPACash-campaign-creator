@@ -35,7 +35,7 @@ class MultiSelect extends PureComponent {
           renderValue={selected => selected.map(s => list[s].text).join(', ')}
           {...props}
         >
-          {SelectItems({ value: value, items: list })}
+          {SelectItems({ value, items: list })}
         </Select>
       </FormControl>
     )

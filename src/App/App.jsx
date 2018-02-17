@@ -6,6 +6,7 @@ import { GetInitialState } from '../services/initdata'
 class App extends PureComponent {
   state = {
     conditions: {},
+    campaign: {},
     verticals: [],
     offers: [],
     loading: true
@@ -18,11 +19,13 @@ class App extends PureComponent {
       .catch(console.error.bind(console))
   }
   render() {
-    const { offers, conditions, verticals, loading, campaign } = this.state
+    const { offers, conditions, verticals, loading, campaign, defaultOffers, rules } = this.state
     return (
       <Campaign
         loadingMessage="Loading verticals and conditions"
         isLoading={loading}
+        defaultOffers={defaultOffers}
+        rules={rules}
         campaign={campaign}
         offers={offers}
         conditions={conditions}

@@ -33,7 +33,6 @@ class CampaignSettings extends PureComponent {
   }
 
   setSubVertical = id => {
-    console.log(id)
     const subVerticals = this.props.verticalsList.find(v => v.id === id).subVerticals
     this.setState({ subVerticals })
   }
