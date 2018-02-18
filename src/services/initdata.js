@@ -1,13 +1,12 @@
 import { InitData } from './api'
-
-import { NormalizeConditions } from './normalizers'
+import Conditions from './models/conditions'
 
 export const GetInitialState = async id => {
   const EmptyCampaign = { campaign: { name: '', vertical: '', subVertical: '' }, defaultOffers: [], rules: [] }
   try {
     const initData = await InitData(id)
     const { verticals, connections, countries, devicesTypes, campaign: campaignData } = initData
-    const conditions = NormalizeConditions({ connections, countries, devicesTypes }).entities
+    const conditions = new Conditions({ connections, countries, devicesTypes })
     const { campaign, defaultOffers, rules } = Array.isArray(campaignData)
       ? EmptyCampaign
       : {
