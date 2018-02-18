@@ -8,7 +8,7 @@ import Grid from 'material-ui/Grid'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui-icons/Delete'
 
-import MultiSelect from '../MultiSelect'
+import Autocomplete from '../Autocomplete'
 
 import withStyles from 'material-ui/styles/withStyles'
 import styles from './styles'
@@ -28,14 +28,15 @@ const Condition = ({ conditionsList = [], value, mode, classes, conditionName, o
       />
     </Grid>
     <Grid item xs={10} sm={11} md={7} className={classes.item}>
-      <MultiSelect
+      <Autocomplete
         fullWidth
+        multi
         label="Conditions"
         placeholder="Select the conditions"
         name="value"
         onChange={onChange}
         value={value}
-        list={conditionsList}
+        options={conditionsList}
       />
     </Grid>
     <Grid item xs={2} sm={1} className={`${classes.item} ${classes.itemWithMargin}`}>
@@ -48,11 +49,11 @@ const Condition = ({ conditionsList = [], value, mode, classes, conditionName, o
 
 Condition.propTypes = {
   mode: PropTypes.bool,
-  conditionsList: PropTypes.object,
+  conditionsList: PropTypes.array,
   classes: PropTypes.object,
   onDelete: PropTypes.func.isRequired,
   conditionName: PropTypes.string.isRequired,
-  value: PropTypes.arrayOf(PropTypes.string)
+  value: PropTypes.string
 }
 
 export default withStyles(styles)(Condition)

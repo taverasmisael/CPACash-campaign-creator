@@ -10,12 +10,22 @@ class Autocomplete extends PureComponent {
   static propTypes = {
     label: PropTypes.string.isRequired,
     value: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-    options: PropTypes.array.isRequired
+    placeholder: PropTypes.string,
+    multi: PropTypes.bool,
+    options: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired
+  }
+
+  onChange = v => {
+    const name = this.props.name
+    const value = v.includes('0') ? '0' : v
+    this.props.onChange({ target: { name, value } })
   }
 
   render() {
-    const { label, value, options, onChange, placeholder, multi, ...props } = this.props
+    const { label, value, options, placeholder, multi, ...props } = this.props
+    const onChange = this.onChange
+
     return (
       <FormControl {...props}>
         <InputLabel shrink htmlFor="select-multiple-chip">

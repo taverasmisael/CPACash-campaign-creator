@@ -30,7 +30,7 @@ class Rule extends PureComponent {
         state => ({
           activeConditions: [
             ...state.activeConditions,
-            { id, conditionName: titleCase(type), conditionKey: type, mode: true, value: [] }
+            { id, conditionName: titleCase(type), conditionKey: type, mode: true, value: '' }
           ]
         }),
         this.onChange

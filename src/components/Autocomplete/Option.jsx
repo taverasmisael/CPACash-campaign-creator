@@ -15,7 +15,7 @@ class Option extends PureComponent {
 
   render() {
     const { children, isFocused, isSelected, onFocus } = this.props
-
+    
     return (
       <MenuItem
         onFocus={onFocus}

@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-import { titleCase } from 'change-case'
 import compare from 'just-compare'
 
 import Button from 'material-ui/Button'
@@ -16,7 +15,7 @@ const ConditionShape = PropTypes.shape({
   conditionName: PropTypes.string.isRequired,
   conditionKey: PropTypes.string.isRequired,
   mode: PropTypes.bool.isRequired,
-  value: PropTypes.arrayOf(PropTypes.string)
+  value: PropTypes.string
 })
 class ConditionsContainer extends PureComponent {
   static propTypes = {
@@ -24,7 +23,7 @@ class ConditionsContainer extends PureComponent {
     activeConditions: PropTypes.arrayOf(ConditionShape),
     onCreateCondition: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired
   }
 
   state = { anchorEl: null, activeConditionsKeys: [] }
@@ -37,19 +36,10 @@ class ConditionsContainer extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!compare(nextProps.activeConditions, this.props.activeConditions)) {
-      this.setState({
-        activeConditionsKeys: nextProps.activeConditions.map(c => c.conditionKey)
-      })
+    if (nextProps.activeConditions.length && !compare(nextProps.activeConditions, this.props.activeConditions)) {
+      this.setState({ activeConditionsKeys: nextProps.activeConditions.map(k => k.conditionKey) })
     }
   }
-
-  componentDidMount() {
-    this.setState({
-      activeConditionsKeys: this.props.activeConditions.map(c => c.conditionKey)
-    })
-  }
-
   creator = () => {
     const { anchorEl, activeConditionsKeys } = this.state
     const { conditions } = this.props
@@ -65,9 +55,13 @@ class ConditionsContainer extends PureComponent {
           Add Condition
         </Button>
         <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.closeAddMenu}>
-          {Object.keys(conditions).map(k => (
-            <MenuItem key={k} onClick={this.onCreateCondition(k)} disabled={activeConditionsKeys.includes(k)}>
-              {titleCase(k)}
+          {conditions.conditionsLabels.map(condition => (
+            <MenuItem
+              key={condition.value}
+              onClick={this.onCreateCondition(condition.value)}
+              disabled={activeConditionsKeys.includes(condition.value)}
+            >
+              {condition.label}
             </MenuItem>
           ))}
         </Menu>
@@ -86,7 +80,7 @@ class ConditionsContainer extends PureComponent {
           conditions,
           emptyMessage: 'There are no conditions in this rule. Please add a condition using the button down below',
           isEmpty: !activeConditions.length,
-          activeConditions: activeConditions,
+          activeConditions: activeConditions
         }}
         CustomCreator={this.creator}
         title="Conditions"

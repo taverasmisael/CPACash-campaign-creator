@@ -9,7 +9,7 @@ const ConditionShape = PropTypes.shape({
   conditionName: PropTypes.string.isRequired,
   conditionKey: PropTypes.string.isRequired,
   mode: PropTypes.bool.isRequired,
-  value: PropTypes.arrayOf(PropTypes.string)
+  value: PropTypes.string
 })
 class ConditionsList extends PureComponent {
   static propTypes = {
