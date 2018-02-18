@@ -8,11 +8,11 @@ import Divider from 'material-ui/Divider'
 
 import ConditionsContainer from '../../containers/ConditionsContainer'
 import OffersContainer from '../../containers/OffersContainer'
-
+import Condition from '../../services/models/conditions'
 class Rule extends PureComponent {
   static propTypes = {
     id: PropTypes.string.isRequired,
-    conditions: PropTypes.object.isRequired,
+    conditions: PropTypes.instanceOf(Condition).isRequired,
     offersList: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     onDelete: PropTypes.func

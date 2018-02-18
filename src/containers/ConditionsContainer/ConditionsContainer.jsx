@@ -10,6 +10,8 @@ import MenuItem from 'material-ui/Menu/MenuItem'
 import Container from '../Container'
 import ConditionsList from '../../lists/ConditionsList'
 
+import Condition from '../../services/models/conditions'
+
 const ConditionShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
   conditionName: PropTypes.string.isRequired,
@@ -19,7 +21,7 @@ const ConditionShape = PropTypes.shape({
 })
 class ConditionsContainer extends PureComponent {
   static propTypes = {
-    conditions: PropTypes.object.isRequired,
+    conditions: PropTypes.instanceOf(Condition).isRequired,
     activeConditions: PropTypes.arrayOf(ConditionShape),
     onCreateCondition: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
