@@ -45,15 +45,34 @@ export default class Conditions {
       devicesTypes: devicesToSelectOptions(devicesTypes),
       connections: listToSelectOptions(connections)
     }
-    this[normalized] = NormalizeConditions(this[conditions])
-    this.countries = this[conditions].countries
-    this.devicesTypes = this[conditions].devicesTypes
-    this.connections = this[conditions].connections
-    const { result, entities } = this[normalized]
-    this.os = mapKeysToValues(getRealtionKeys('os', result.devicesTypes, entities.deviceTypes), entities.os)
-    this.carriers = mapKeysToValues(
-      getRealtionKeys('carriers', result.countries, entities.countries),
-      entities.carriers
-    )
+  }
+  normalize = () => NormalizeConditions(this[conditions])
+
+  get normalized() {
+    let response
+    if (this[normalized]) {
+      response = this[normalized]
+    } else {
+      this[normalized] = this.normalize()
+      response = this[normalized]
+    }
+    return response
+  }
+  get countries() {
+    return this[conditions].countries
+  }
+  get devicesTypes() {
+    return this[conditions].devicesTypes
+  }
+  get connections() {
+    return this[conditions].connections
+  }
+  get os() {
+    const { result, entities } = this.normalized
+    return mapKeysToValues(getRealtionKeys('os', result.devicesTypes, entities.deviceTypes), entities.os)
+  }
+  get carriers() {
+    const { result, entities } = this.normalized
+    return mapKeysToValues(getRealtionKeys('carriers', result.countries, entities.countries), entities.carriers)
   }
 }
