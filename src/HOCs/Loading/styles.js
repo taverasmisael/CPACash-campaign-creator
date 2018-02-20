@@ -24,5 +24,8 @@ export default theme => ({
     margin: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 2,
     width: 'calc(100% - 32px)'
+  },
+  retryButton: {
+    marginTop: theme.spacing.unit * 2
   }
 })
