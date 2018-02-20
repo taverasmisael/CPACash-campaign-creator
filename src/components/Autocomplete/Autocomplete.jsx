@@ -35,6 +35,7 @@ class Autocomplete extends PureComponent {
           fullWidth
           inputComponent={SelectWrapper}
           inputProps={{
+            ...props,
             multi,
             value,
             onChange,

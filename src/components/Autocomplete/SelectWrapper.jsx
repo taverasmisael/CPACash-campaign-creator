@@ -10,15 +10,15 @@ import CancelIcon from 'material-ui-icons/Cancel'
 
 import Option from './Option'
 
-import Select from 'react-select'
+import VirtualizedSelect from 'react-virtualized-select'
 import 'react-select/dist/react-select.css'
 
 import withStyles from 'material-ui/styles/withStyles'
 import styles from './styles'
 
 const SelectWrapper = ({ classes, emptyText = 'Not results were found.', ...props }) => (
-  <Select
-    optionComponent={Option}
+  <VirtualizedSelect
+    optionRenderer={Option}
     noResultsText={<Typography variant="caption">{emptyText}</Typography>}
     arrowRenderer={arrowProps => (arrowProps.isOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />)}
     clearRenderer={() => <ClearIcon />}
