@@ -14,7 +14,7 @@ class App extends PureComponent {
 
   saveCampaign = campaignInfo => console.log(campaignInfo)
   componentDidMount() {
-    GetInitialState()
+    GetInitialState(1)
       .then(res => this.setState({ ...res, loading: false }))
       .catch(console.error.bind(console))
   }

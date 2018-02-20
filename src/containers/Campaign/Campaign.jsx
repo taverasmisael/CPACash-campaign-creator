@@ -16,8 +16,8 @@ class Campaign extends PureComponent {
       vertical: PropTypes.string.isRequired,
       subVertical: PropTypes.string.isRequired
     }).isRequired,
-    defaultOffers: PropTypes.array,
-    rues: PropTypes.array,
+    defaultOffers: PropTypes.array.isRequired,
+    rules: PropTypes.array.isRequired,
     offers: PropTypes.array,
     verticals: PropTypes.array,
     conditions: PropTypes.object,

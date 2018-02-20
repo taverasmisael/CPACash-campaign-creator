@@ -1,21 +1,15 @@
-import { map, reduce } from 'ramda'
-import { NormalizeConditions } from '../normalizers'
+import {
+  NormalizeConditions,
+  countriesToSelectOptions,
+  devicesToSelectOptions,
+  mapKeysToValues,
+  getRealtionKeys,
+  listToSelectOptions
+} from '../normalizers'
 
 const conditions = Symbol('conditions')
 const normalized = Symbol('normalized')
 
-const listToSelectOptions = map(v => ({ value: v.id, label: v.text, ...v }))
-const countriesToSelectOptions = map(v => ({
-  value: v.id,
-  label: v.text,
-  carriers: listToSelectOptions(v.carriers)
-}))
-const devicesToSelectOptions = map(v => ({ value: v.id, label: v.text, os: listToSelectOptions(v.os) }))
-const unique = reduce((acc, curr) => [...acc, ...(acc.includes(curr) ? [] : [curr])], [])
-const getRealtionKeys = (key, primary, foregin) =>
-  unique(reduce((acc, curr) => [...acc, ...foregin[curr][key]], [], primary))
-
-const mapKeysToValues = (keys, values) => map(k => values[k], keys)
 export default class Conditions {
   conditionsLabels = [
     {
