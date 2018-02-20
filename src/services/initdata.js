@@ -1,9 +1,9 @@
 import { InitData, GetOffers } from './api'
-import Conditions from './models/conditions'
-import Campaign from './models/campaign'
-import Rule from './models/rule'
+import Conditions from '../models/conditions'
+import Campaign from '../models/campaign'
+import Rule from '../models/rule'
 import { mapOffers } from './normalizers'
-
+import FetchError from './FetchError'
 export const GetInitialState = async id => {
   try {
     const initData = await InitData(id)
@@ -16,7 +16,7 @@ export const GetInitialState = async id => {
     const defaultOffers = mapOffers(campaignDefaultOfferes)
     return { campaign, defaultOffers, rules, verticals, conditions }
   } catch (error) {
-    console.error(error)
+    throw new FetchError('ID001', '[CAMPAIGN]: Error Loading IntialState', error)
   }
 }
 
@@ -25,6 +25,6 @@ export const GetDefaultOffers = async () => {
     const offers = await GetOffers([])
     return mapOffers(offers)
   } catch (error) {
-    console.error(error)
+    throw new FetchError('DO001', '[DEFAULTOFFERS]: Error Loading DefaultOffers', error)
   }
 }

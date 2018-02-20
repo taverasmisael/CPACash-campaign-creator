@@ -9,7 +9,8 @@ class App extends PureComponent {
     campaign: {},
     verticals: [],
     offers: [],
-    loading: true
+    loading: true,
+    errorMessage: ''
   }
 
   saveCampaign = campaignInfo => console.log(campaignInfo)
@@ -21,6 +22,7 @@ class App extends PureComponent {
   }
 
   loadInitialState = async () => {
+    this.setState({ loading: true, hasError: false, errorMessage: ''})
     try {
       const campaign = await this.loadCampaign()
       const offers = await this.loadDefaultOffers()
@@ -30,17 +32,38 @@ class App extends PureComponent {
         ...campaign
       }
     } catch (error) {
-      throw new Error(error)
+      return {
+        hasError: true,
+        errorMessage: error.message,
+        loading: false
+      }
     }
   }
-  componentDidMount() {
+
+  setInitialState = () => {
     this.loadInitialState().then(state => this.setState(state))
   }
+  componentDidMount() {
+    this.setInitialState()
+  }
   render() {
-    const { offers, conditions, verticals, loading, campaign, defaultOffers, rules } = this.state
+    const {
+      offers,
+      conditions,
+      verticals,
+      loading,
+      campaign,
+      defaultOffers,
+      rules,
+      hasError,
+      errorMessage
+    } = this.state
     return (
       <Campaign
         loadingMessage="Loading verticals and conditions"
+        hasError={hasError}
+        onRetry={this.setInitialState}
+        errorMessage={errorMessage}
         isLoading={loading}
         defaultOffers={defaultOffers}
         rules={rules}
