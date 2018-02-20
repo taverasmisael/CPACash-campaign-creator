@@ -23,8 +23,8 @@ const Offer = ({ offersList = [], value = '', weight = 100, id, onChange, onDele
         onChange={onChange}
       >
         {offersList.map(offer => (
-          <MenuItem key={offer.id} value={offer.id}>
-            {offer.value}
+          <MenuItem key={offer.id} value={offer.value}>
+            {offer.label}
           </MenuItem>
         ))}
       </TextField>
