@@ -9,30 +9,35 @@ import {
 
 const conditions = Symbol('conditions')
 const normalized = Symbol('normalized')
-
+export const conditionsLabels = [
+  {
+    id: '0',
+    value: 'connections',
+    label: 'Connections'
+  },
+  {
+    id: '1',
+    value: 'countries',
+    label: 'Countries'
+  },
+  {
+    id: '3',
+    value: 'carriers',
+    label: 'Carriers'
+  },
+  {
+    id: '4',
+    value: 'devicesTypes',
+    label: 'Device Types'
+  },
+  {
+    id: '5',
+    value: 'os',
+    label: 'Os'
+  }
+]
 export default class Conditions {
-  conditionsLabels = [
-    {
-      value: 'os',
-      label: 'Os'
-    },
-    {
-      value: 'devicesTypes',
-      label: 'Device Types'
-    },
-    {
-      value: 'connections',
-      label: 'Connections'
-    },
-    {
-      value: 'countries',
-      label: 'Countries'
-    },
-    {
-      value: 'carriers',
-      label: 'Carriers'
-    }
-  ]
+  conditionsLabels = conditionsLabels
   constructor({ connections, countries, devicesTypes }) {
     this[conditions] = {
       countries: countriesToSelectOptions(countries),
