@@ -10,7 +10,7 @@ import MenuItem from 'material-ui/Menu/MenuItem'
 import Container from '../Container'
 import ConditionsList from '../../lists/ConditionsList'
 
-import Condition from '../../services/models/conditions'
+import Condition from '../../models/conditions'
 
 const ConditionShape = PropTypes.shape({
   id: PropTypes.string.isRequired,

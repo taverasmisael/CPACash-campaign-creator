@@ -1,4 +1,4 @@
-import { mapConditions, mapOffers } from '../normalizers'
+import { mapConditions, mapOffers } from '../services/normalizers'
 export default class Rule {
   constructor({ id = '', campaign_link_id: campaign = '', conditions = [], offers = [] }) {
     this.id = id

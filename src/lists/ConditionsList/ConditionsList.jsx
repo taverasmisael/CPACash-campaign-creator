@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import EmptyContainer from '../../HOCs/EmptyContainer'
 import Condition from '../../components/Condition'
 
-import ConditionClass from '../../services/models/conditions'
+import ConditionClass from '../../models/conditions'
 
 const ConditionShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
