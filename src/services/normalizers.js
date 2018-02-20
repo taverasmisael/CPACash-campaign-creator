@@ -1,8 +1,8 @@
 import { normalize as normalizr } from 'normalizr'
 import { flip, curry, map, reduce } from 'ramda'
 
-import ConditionsSchema from './schemas/conditions'
-import { conditionsLabels } from './models/conditions'
+import ConditionsSchema from '../models/schemas/conditions'
+import { conditionsLabels } from '../models/conditions'
 
 const normalize = curry(flip(normalizr))
 

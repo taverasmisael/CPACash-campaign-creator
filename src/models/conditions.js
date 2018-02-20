@@ -5,7 +5,7 @@ import {
   mapKeysToValues,
   getRealtionKeys,
   listToSelectOptions
-} from '../normalizers'
+} from '../services/normalizers'
 
 const conditions = Symbol('conditions')
 const normalized = Symbol('normalized')
