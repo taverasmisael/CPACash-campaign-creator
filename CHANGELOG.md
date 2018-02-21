@@ -2,6 +2,57 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.8.0...v1.0.0) (2018-02-21)
+
+
+### Bug Fixes
+
+* **Autocomplete:** never send null as a value, send empty string instead ([9b7917f](https://github.com/taverasmisael/CPACash-campaign-creator/commit/9b7917f))
+* **filepath:** update path to models ([c80925e](https://github.com/taverasmisael/CPACash-campaign-creator/commit/c80925e))
+* **uniqueKey:** ensuere unique keys in SelectItems ([91b4bd8](https://github.com/taverasmisael/CPACash-campaign-creator/commit/91b4bd8))
+
+
+### Features
+
+* **api:** implement error catch at api level ([c5413ca](https://github.com/taverasmisael/CPACash-campaign-creator/commit/c5413ca))
+* **api:** use different URLs edit and create ([f299fd1](https://github.com/taverasmisael/CPACash-campaign-creator/commit/f299fd1))
+* **App:** move to root of src folder, implement services ([8c8083f](https://github.com/taverasmisael/CPACash-campaign-creator/commit/8c8083f))
+* **Autocomplete:** create using react-select ([366f8aa](https://github.com/taverasmisael/CPACash-campaign-creator/commit/366f8aa))
+* **Autocomplete:** implement in condition and fix onChange behaviour ([896c365](https://github.com/taverasmisael/CPACash-campaign-creator/commit/896c365))
+* **campaign:** create model for Campaign. Split rules and defaultOffers ([4f55e3a](https://github.com/taverasmisael/CPACash-campaign-creator/commit/4f55e3a))
+* **CampaignRules:** pass down rules to hydratate other components ([ea95d9e](https://github.com/taverasmisael/CPACash-campaign-creator/commit/ea95d9e))
+* **condition:** add getters for different conditions ([3d0dd39](https://github.com/taverasmisael/CPACash-campaign-creator/commit/3d0dd39))
+* **Container:** add canAdd prop to enable createButton ([6dfba16](https://github.com/taverasmisael/CPACash-campaign-creator/commit/6dfba16))
+* **defaultOffers:** map defaultOffers ([871187b](https://github.com/taverasmisael/CPACash-campaign-creator/commit/871187b))
+* **initData:** complete initData get and mapping when creating ([d1b7939](https://github.com/taverasmisael/CPACash-campaign-creator/commit/d1b7939))
+* **lib:** add normalizr to normalize the api response ([16f86e4](https://github.com/taverasmisael/CPACash-campaign-creator/commit/16f86e4))
+* **lib:** install ramda ([a47b23f](https://github.com/taverasmisael/CPACash-campaign-creator/commit/a47b23f))
+* **move:** move models to folder in src root ([e72cdc2](https://github.com/taverasmisael/CPACash-campaign-creator/commit/e72cdc2))
+* **MultiSelect:** cache listKeys on multiselect ([39a8630](https://github.com/taverasmisael/CPACash-campaign-creator/commit/39a8630))
+* **NormalizeConditions:** create new class to handle conditionsList ([1868553](https://github.com/taverasmisael/CPACash-campaign-creator/commit/1868553))
+* **Normalizer:** normalize conditions ([cd1b107](https://github.com/taverasmisael/CPACash-campaign-creator/commit/cd1b107))
+* **oferrs:**  create entry point to load offers. ([6c1486c](https://github.com/taverasmisael/CPACash-campaign-creator/commit/6c1486c))
+* **offers:** make rules load their offers on condition change ([18c1580](https://github.com/taverasmisael/CPACash-campaign-creator/commit/18c1580))
+* **refact:** App move request to separated async method ([08f642e](https://github.com/taverasmisael/CPACash-campaign-creator/commit/08f642e))
+* **refact:** Loading component now can also reflect error and retry ([7470a30](https://github.com/taverasmisael/CPACash-campaign-creator/commit/7470a30))
+* **refact:** move mapOffers to normalizer and transform to point-free ([e1330c0](https://github.com/taverasmisael/CPACash-campaign-creator/commit/e1330c0))
+* **refact:** require instance of Conditions for conditionsList ([ca13772](https://github.com/taverasmisael/CPACash-campaign-creator/commit/ca13772))
+* **refact:** use autocomplete for offers ([160fc08](https://github.com/taverasmisael/CPACash-campaign-creator/commit/160fc08))
+* **refact:** use virtualized select for autocomplete component ([d363b8f](https://github.com/taverasmisael/CPACash-campaign-creator/commit/d363b8f))
+* **rule:**  create Rule class and implement it ([91010eb](https://github.com/taverasmisael/CPACash-campaign-creator/commit/91010eb))
+* **Select:** use 'text' prop instead of value ([c665322](https://github.com/taverasmisael/CPACash-campaign-creator/commit/c665322))
+* **services:** create app and mapper and initdata ([a8e9e1c](https://github.com/taverasmisael/CPACash-campaign-creator/commit/a8e9e1c))
+* **subvertical:** use subVertical instead ([31e5f31](https://github.com/taverasmisael/CPACash-campaign-creator/commit/31e5f31))
+
+
+### BREAKING CHANGES
+
+* **offers:** now the rules are the responsible for loading their offers and reseting the activeOffers each time the conditions are changed
+* **Select:** now the Select and MultiSelect components use the text prop instead of value
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.7.1...v0.8.0) (2018-02-15)
 
