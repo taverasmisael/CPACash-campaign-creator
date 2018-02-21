@@ -15,10 +15,21 @@ class MultiSelect extends PureComponent {
     onChange: PropTypes.func.isRequired,
     list: PropTypes.object.isRequired
   }
+
+  state = {
+    listKeys: []
+  }
   onDeleteItem = item => {
     const value = this.props.value.filter(v => v !== item)
     this.props.onChange({ target: { value } })
   }
+
+  componentDidMount() {
+    this.setState({
+      listKeys: Object.keys(this.props.list)
+    })
+  }
+
   render() {
     const { label, value, list, onChange, placeholder, ...props } = this.props
     return (
@@ -32,10 +43,10 @@ class MultiSelect extends PureComponent {
           value={value}
           onChange={onChange}
           input={<Input id="select-multiple-chip" placeholder={placeholder} />}
-          renderValue={selected => selected.map(s => list[s].value).join(', ')}
+          renderValue={selected => selected.map(s => list[s].text).join(', ')}
           {...props}
         >
-          {SelectItems({ value: value, items: list })}
+          {SelectItems({ value, list, keys: this.state.listKeys })}
         </Select>
       </FormControl>
     )

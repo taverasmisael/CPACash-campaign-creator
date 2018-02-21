@@ -14,18 +14,18 @@ class Campaign extends PureComponent {
     campaign: PropTypes.shape({
       name: PropTypes.string.isRequired,
       vertical: PropTypes.string.isRequired,
-      subvertical: PropTypes.string.isRequired
-    }),
-    defaultOffers: PropTypes.array,
-    rues: PropTypes.array,
-    offers: PropTypes.array,
+      subVertical: PropTypes.string.isRequired
+    }).isRequired,
+    defaultOffers: PropTypes.array.isRequired,
+    rules: PropTypes.array.isRequired,
+    defaultOffersList: PropTypes.array,
     verticals: PropTypes.array,
     conditions: PropTypes.object,
     onSave: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    offers: [],
+    defaultOffersList: [],
     verticals: [],
     conditions: {}
   }
@@ -34,7 +34,7 @@ class Campaign extends PureComponent {
     campaign: {
       name: '',
       vertical: '',
-      subvertical: ''
+      subVertical: ''
     },
     defaultOffers: [],
     rules: []
@@ -51,7 +51,7 @@ class Campaign extends PureComponent {
   canSaveCampaign = () =>
     this.setState(state => {
       const { campaign, defaultOffers } = state
-      const canSave = Boolean(campaign.name && campaign.vertical && campaign.subvertical && defaultOffers.length)
+      const canSave = Boolean(campaign.name && campaign.vertical && campaign.subVertical && defaultOffers.length)
       return { canSave }
     })
 
@@ -62,27 +62,29 @@ class Campaign extends PureComponent {
 
   onSaveCampaign = () => this.props.onSave(this.state)
 
-  onCreateDefaultOffer = () => true
-
   onChangeDefaultOffers = defaultOffers => this.setState({ defaultOffers })
+
+  componentWillMount() {
+    const { campaign, defaultOffers = [], rules = [] } = this.props
+    this.setState({ campaign, defaultOffers, rules })
+  }
   render() {
-    const { campaign: { name, vertical, subvertical }, canSave, defaultOffers, rules } = this.state
-    const { offers, conditions, verticals } = this.props
+    const { campaign: { name, vertical, subVertical }, canSave, defaultOffers, rules } = this.state
+    const { defaultOffersList, conditions, verticals } = this.props
     return (
       <Fragment>
         <CampaignSettings
           name={name}
           vertical={vertical}
-          subvertical={subvertical}
+          subVertical={subVertical}
           canSave={canSave}
           verticalsList={verticals}
           onChange={this.onChangeCampaignSettings}
           onSave={this.onSaveCampaign}
         />
-        <DefaultRule offers={offers} activeOffers={defaultOffers} onChange={this.onChangeDefaultOffers} />
+        <DefaultRule offers={defaultOffersList} activeOffers={defaultOffers} onChange={this.onChangeDefaultOffers} />
         <RulesContainer
           rules={rules}
-          offersList={offers}
           conditions={conditions}
           onDelete={this.deleteRule}
           onChange={this.onChangeRule}

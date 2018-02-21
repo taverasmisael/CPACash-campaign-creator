@@ -2,32 +2,26 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import TextField from 'material-ui/TextField'
-import MenuItem from 'material-ui/Menu/MenuItem'
 import Grid from 'material-ui/Grid'
 import IconButton from 'material-ui/IconButton'
 import DeleteIcon from 'material-ui-icons/Delete'
 
+import Autocomplete from '../Autocomplete'
+
 const Offer = ({ offersList = [], value = '', weight = 100, id, onChange, onDelete }) => (
   <Grid container spacing={16}>
     <Grid item xs={12} sm={6}>
-      <TextField
-        select
+      <Autocomplete
         fullWidth
         required
         margin="normal"
         label="Offer Name"
         name="value"
         id={`Offer-${id}`}
-        InputLabelProps={{ shrink: true }}
         value={value}
         onChange={onChange}
-      >
-        {offersList.map(offer => (
-          <MenuItem key={offer.id} value={offer.id}>
-            {offer.value}
-          </MenuItem>
-        ))}
-      </TextField>
+        options={offersList}
+      />
     </Grid>
     <Grid item xs={12} sm={6}>
       <Grid container spacing={16} style={{ padding: 0 }} alignItems="flex-end">

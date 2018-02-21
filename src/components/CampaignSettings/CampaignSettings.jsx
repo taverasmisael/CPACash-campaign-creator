@@ -18,7 +18,7 @@ class CampaignSettings extends PureComponent {
     name: PropTypes.string.isRequired,
     vertical: PropTypes.string.isRequired,
     verticalsList: PropTypes.array.isRequired,
-    subvertical: PropTypes.string.isRequired,
+    subVertical: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired
   }
@@ -29,18 +29,26 @@ class CampaignSettings extends PureComponent {
   }
 
   state = {
-    subverticals: []
+    subVerticals: []
+  }
+
+  setSubVertical = id => {
+    const subVerticals = this.props.verticalsList.find(v => v.id === id).subVerticals
+    this.setState({ subVerticals })
   }
 
   handleVerticalChange = event => {
     const { target: { value } } = event
-    const subverticals = this.props.verticalsList.find(v => v.id === value).subverticals
-    this.setState({ subverticals })
+    this.setSubVertical(value)
     this.props.onChange(event)
   }
+
+  componentDidMount() {
+    if (this.props.vertical) this.setSubVertical(this.props.vertical)
+  }
   render() {
-    const { classes, name, vertical, subvertical, verticalsList, onChange, onSave, canSave } = this.props
-    const { subverticals } = this.state
+    const { classes, name, vertical, subVertical, verticalsList, onChange, onSave, canSave } = this.props
+    const { subVerticals } = this.state
     return (
       <Paper elevation={1} className={classes.container}>
         <Typography variant="headline" align="center" component="h1" gutterBottom>
@@ -71,7 +79,7 @@ class CampaignSettings extends PureComponent {
             >
               {verticalsList.map(vertical => (
                 <MenuItem key={vertical.id} value={vertical.id}>
-                  {vertical.value}
+                  {vertical.text}
                 </MenuItem>
               ))}
             </TextField>
@@ -80,16 +88,16 @@ class CampaignSettings extends PureComponent {
             <TextField
               select
               fullWidth
-              name="subvertical"
-              label="Subvertical"
-              placeholder="Campaign Subvertical"
-              value={subvertical}
+              name="subVertical"
+              label="Sub-vertical"
+              placeholder="Campaign subVertical"
+              value={subVertical}
               onChange={onChange}
               InputLabelProps={{ shrink: true }}
             >
-              {subverticals.map(vertical => (
+              {subVerticals.map(vertical => (
                 <MenuItem key={vertical.id} value={vertical.id}>
-                  {vertical.value}
+                  {vertical.text}
                 </MenuItem>
               ))}
             </TextField>

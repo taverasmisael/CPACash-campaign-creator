@@ -4,17 +4,19 @@ import PropTypes from 'prop-types'
 import EmptyContainer from '../../HOCs/EmptyContainer'
 import Condition from '../../components/Condition'
 
+import ConditionClass from '../../models/conditions'
+
 const ConditionShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
   conditionName: PropTypes.string.isRequired,
   conditionKey: PropTypes.string.isRequired,
   mode: PropTypes.bool.isRequired,
-  value: PropTypes.arrayOf(PropTypes.string)
+  value: PropTypes.string
 })
 class ConditionsList extends PureComponent {
   static propTypes = {
     ...EmptyContainer.propTypes,
-    conditions: PropTypes.object.isRequired,
+    conditions: PropTypes.instanceOf(ConditionClass).isRequired,
     activeConditions: PropTypes.arrayOf(ConditionShape),
     onDelete: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired

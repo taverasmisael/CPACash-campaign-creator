@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography'
 import withStyles from 'material-ui/styles/withStyles'
 import styles from './styles'
 
-const Container = ({ classes, title, ListComponent, listProps, onCreate, createText, CustomCreator }) => (
+const Container = ({ classes, title, ListComponent, listProps, onCreate, canCreate, createText, CustomCreator }) => (
   <div className={classes.wrapper}>
     <Typography variant="subheading" gutterBottom component="h4">
       {title}
@@ -16,22 +16,25 @@ const Container = ({ classes, title, ListComponent, listProps, onCreate, createT
       <ListComponent {...listProps} />
     </div>
     {CustomCreator ? (
-      <CustomCreator />
+      <CustomCreator canCreate={canCreate} />
     ) : (
-      <Button aria-haspopup="true" onClick={onCreate} size="small" color="secondary">
+      <Button aria-haspopup="true" onClick={onCreate} size="small" disabled={!canCreate} color="secondary">
         {createText}
       </Button>
     )}
   </div>
 )
-
+Container.defaultProps = {
+  canCreate: true
+}
 Container.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   ListComponent: PropTypes.func.isRequired,
   listProps: PropTypes.object.isRequired,
   onCreate: PropTypes.func,
-  createText: PropTypes.string
+  createText: PropTypes.string,
+  canCreate: PropTypes.bool
 }
 
 export default withStyles(styles)(Container)
