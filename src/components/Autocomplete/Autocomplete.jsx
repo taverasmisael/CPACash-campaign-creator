@@ -18,7 +18,7 @@ class Autocomplete extends PureComponent {
 
   onChange = v => {
     const name = this.props.name
-    const value = v.includes('0') ? '0' : v
+    const value = Array.isArray(v) && v.includes('0') ? '0' : v
     this.props.onChange({ target: { name, value } })
   }
 

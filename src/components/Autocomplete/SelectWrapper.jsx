@@ -23,10 +23,13 @@ const SelectWrapper = ({ classes, emptyText = 'Not results were found.', ...prop
     arrowRenderer={arrowProps => (arrowProps.isOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />)}
     clearRenderer={() => <ClearIcon />}
     valueComponent={({ value, children, onRemove, ...props }) => {
-      const onDelete = event => {
-        event.stopPropagation()
-        event.preventDefault()
-        onRemove(value)
+      let onDelete
+      if (onRemove) {
+        onDelete = event => {
+          event.stopPropagation()
+          event.preventDefault()
+          onRemove(value)
+        }
       }
       return (
         <Chip
