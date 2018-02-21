@@ -18,14 +18,15 @@ class Autocomplete extends PureComponent {
 
   onChange = v => {
     const name = this.props.name
-    const value = Array.isArray(v) && v.includes('0') ? '0' : v
+    const val = Array.isArray(v) && v.includes('0') ? '0' : v
+    const value = val || ''
     this.props.onChange({ target: { name, value } })
   }
 
   render() {
     const { label, value, options, placeholder, multi, ...props } = this.props
     const onChange = this.onChange
-
+    
     return (
       <FormControl {...props}>
         <InputLabel shrink htmlFor="select-multiple-chip">
@@ -40,11 +41,11 @@ class Autocomplete extends PureComponent {
             value,
             onChange,
             placeholder,
+            options,
             instaceId: 'instanceID',
             id: 'instanceID',
             name: 'name',
-            simpleValue: true,
-            options
+            simpleValue: true
           }}
         />
       </FormControl>
