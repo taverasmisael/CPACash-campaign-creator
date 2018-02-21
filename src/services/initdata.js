@@ -20,7 +20,7 @@ export const GetInitialState = async id => {
   }
 }
 
-export const GetDefaultOffers = async () => {
+export const GetDefaultOffersList = async () => {
   try {
     const offers = await GetOffers([])
     return mapOffers(offers)

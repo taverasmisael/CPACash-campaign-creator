@@ -1,33 +1,33 @@
 import React, { PureComponent } from 'react'
 import Campaign from '../containers/Campaign/Campaign'
 
-import { GetInitialState, GetDefaultOffers } from '../services/initdata'
+import { GetInitialState, GetDefaultOffersList } from '../services/initdata'
 
 class App extends PureComponent {
   state = {
     conditions: {},
     campaign: {},
     verticals: [],
-    offers: [],
+    defaultOffersList: [],
     loading: true,
     errorMessage: ''
   }
 
   saveCampaign = campaignInfo => console.log(campaignInfo)
-  loadCampaign = () => {
-    return GetInitialState()
+  loadCampaign = id => {
+    return GetInitialState(id)
   }
-  loadDefaultOffers = () => {
-    return GetDefaultOffers()
+  loadDefaultOffersList = () => {
+    return GetDefaultOffersList()
   }
 
-  loadInitialState = async () => {
-    this.setState({ loading: true, hasError: false, errorMessage: ''})
+  loadInitialState = async campaignId => {
+    this.setState({ loading: true, hasError: false, errorMessage: '' })
     try {
-      const campaign = await this.loadCampaign()
-      const offers = await this.loadDefaultOffers()
+      const campaign = await this.loadCampaign(campaignId)
+      const defaultOffersList = await this.loadDefaultOffersList()
       return {
-        offers,
+        defaultOffersList,
         loading: false,
         ...campaign
       }
@@ -48,7 +48,7 @@ class App extends PureComponent {
   }
   render() {
     const {
-      offers,
+      defaultOffersList,
       conditions,
       verticals,
       loading,
@@ -68,7 +68,7 @@ class App extends PureComponent {
         defaultOffers={defaultOffers}
         rules={rules}
         campaign={campaign}
-        offers={offers}
+        defaultOffersList={defaultOffersList}
         conditions={conditions}
         verticals={verticals}
         onSave={this.saveCampaign}

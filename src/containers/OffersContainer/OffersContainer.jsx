@@ -8,6 +8,7 @@ const OffersContainer = ({ offers, activeOffers, onDelete, classes, onCreate, on
   <Container
     title="Offers"
     createText="Add Offer"
+    canCreate={Boolean(offers.length)}
     ListComponent={OffersList}
     listProps={{
       offers,

@@ -37,7 +37,6 @@ class RulesList extends PureComponent {
   static propTypes = {
     ...EmptyContainer.propTypes,
     conditions: PropTypes.any.isRequired,
-    offersList: PropTypes.any.isRequired,
     rules: PropTypes.arrayOf(RuleShape).isRequired,
     onDelete: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired
@@ -66,7 +65,6 @@ class RulesList extends PureComponent {
           id={id}
           key={id}
           conditions={this.props.conditions}
-          offersList={this.props.offersList}
           activeOffers={activeOffers}
           activeConditions={activeConditions}
           onDelete={this.handleDelete(id)}
