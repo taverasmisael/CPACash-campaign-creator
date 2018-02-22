@@ -1,10 +1,17 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+import Loadable from 'react-loadable'
+
 import EmptyContainer from '../../HOCs/EmptyContainer'
-import Condition from '../../components/Condition'
+import AsyncLoading from '../../components/AsyncLoading'
 
 import ConditionClass from '../../models/conditions'
+
+const Condition = Loadable({
+  loader: () => import('../../components/Condition'),
+  loading: AsyncLoading({ name: 'Conditions' })
+})
 
 const ConditionShape = PropTypes.shape({
   id: PropTypes.string.isRequired,

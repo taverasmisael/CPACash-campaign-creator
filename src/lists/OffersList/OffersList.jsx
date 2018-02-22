@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import EmptyContainer from '../../HOCs/EmptyContainer'
-import Offer from '../../components/Offer'
+import Loadable from 'react-loadable'
 
+import EmptyContainer from '../../HOCs/EmptyContainer'
+import AsyncLoading from '../../components/AsyncLoading'
+
+const Offer = Loadable({
+  loader: () => import('../../components/Offer'),
+  loading: AsyncLoading({ name: 'Offers' })
+})
 const OfferShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -12,7 +18,8 @@ const OfferShape = PropTypes.shape({
 class OffersList extends Component {
   static propTypes = {
     ...EmptyContainer.propTypes,
-    offers: PropTypes.arrayOf(PropTypes.shape({id: PropTypes.string.isRequired, value: PropTypes.string.isRequired})).isRequired,
+    offers: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequired, value: PropTypes.string.isRequired }))
+      .isRequired,
     activeOffers: PropTypes.arrayOf(OfferShape),
     onDelete: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired
