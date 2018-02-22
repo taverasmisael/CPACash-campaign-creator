@@ -1,34 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Typography from 'material-ui/Typography'
-import Paper from 'material-ui/Paper'
-import Button from 'material-ui/Button'
-import LinearProgress from 'material-ui/Progress/LinearProgress'
-import RefreshIcon from 'material-ui-icons/Refresh'
+import Loadable from 'react-loadable'
 
 import withStyles from 'material-ui/styles/withStyles'
 import styles from './styles'
+import LoadingMessage from './LoadingMessage'
 
-const LoadingMessage = ({ message, classes = {} }) => (
-  <Paper className={classes.loadingWrapper}>
-    <LinearProgress className={classes.progress} color="secondary" />
-    <Typography variant="headline" component="h2" align="center">
-      {message}
-    </Typography>
-  </Paper>
-)
+const ErrorMessage = Loadable({
+  loader: () => import(/* webpackChunkName: "errorMessage" */ './ErrorMessage'),
+  loading: () => <div />
+})
 
-const ErrorMessage = ({ message, classes = {}, onRetry }) => (
-  <Paper className={classes.loadingWrapper}>
-    <Typography variant="headline" compnent="h2" align="center">
-      {message}
-    </Typography>
-    <Button className={classes.retryButton} color="primary" onClick={onRetry}>
-      Retry <RefreshIcon />
-    </Button>
-  </Paper>
-)
 const Loading = WrappedComponent => {
   const LoadingComponent = ({
     classes,
