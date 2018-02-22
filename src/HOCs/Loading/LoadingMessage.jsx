@@ -15,7 +15,7 @@ const ErrorMessage = ({ message, classes = {} }) => (
   </LoadingPaper>
 )
 
-ErrorMessage.PropTypes = {
+ErrorMessage.propTypes = {
   message: PropTypes.string.isRequired,
   classes: PropTypes.object
 }
