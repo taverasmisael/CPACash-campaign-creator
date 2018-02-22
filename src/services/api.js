@@ -1,5 +1,5 @@
 import fetch from 'unfetch'
-import { objectToFormData } from './normalizers'
+import { objectToFormData } from '../utilities/normalizers'
 const EDITURL =
   'https://gist.githubusercontent.com/anonymous/a84ddc3edb4e6baf7c0ad0d72c9b2a4e/raw/f268371916e48dccc7ed645164ac559695399d98/json'
 const CREATEURL =

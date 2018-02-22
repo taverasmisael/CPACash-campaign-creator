@@ -3,7 +3,7 @@ import { map, find, propEq, prop, split, compose } from 'ramda'
 import { GetOffers } from './api'
 import FetchError from './FetchError'
 import { conditionsLabels } from '../models/conditions'
-import { mapOffers } from './normalizers'
+import { mapOffers } from '../utilities/normalizers'
 
 export const GetOffersList = async conditions => {
   try {
