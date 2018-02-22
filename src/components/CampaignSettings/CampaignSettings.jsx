@@ -7,6 +7,7 @@ import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import MenuItem from 'material-ui/Menu/MenuItem'
+import CircularProgress from 'material-ui/Progress/CircularProgress'
 
 import withStyles from 'material-ui/styles/withStyles'
 import styles from './styles'
@@ -47,7 +48,7 @@ class CampaignSettings extends PureComponent {
     if (this.props.vertical) this.setSubVertical(this.props.vertical)
   }
   render() {
-    const { classes, name, vertical, subVertical, verticalsList, onChange, onSave, canSave } = this.props
+    const { classes, name, vertical, subVertical, verticalsList, onChange, onSave, canSave, isSaving } = this.props
     const { subVerticals } = this.state
     return (
       <Paper elevation={1} className={classes.container}>
@@ -103,16 +104,19 @@ class CampaignSettings extends PureComponent {
             </TextField>
           </Grid>
           <Grid item xs={12} sm={3} md={2}>
-            <Button
-              variant="raised"
-              disabled={!canSave}
-              fullWidth
-              color="primary"
-              className={classes.submitButton}
-              onClick={onSave}
-            >
-              Save
-            </Button>
+            <div className={classes.wrapper}>
+              <Button
+                variant="raised"
+                disabled={!canSave || isSaving}
+                fullWidth
+                color="primary"
+                className={classes.submitButton}
+                onClick={onSave}
+              >
+                {isSaving ? 'Saving...' : 'Save'}
+              </Button>
+              {isSaving && <CircularProgress size={24} className={classes.buttonProgress} />}
+            </div>
           </Grid>
         </Grid>
       </Paper>

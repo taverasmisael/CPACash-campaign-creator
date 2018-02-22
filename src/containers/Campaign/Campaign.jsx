@@ -32,7 +32,8 @@ class Campaign extends PureComponent {
     defaultOffersList: PropTypes.array,
     verticals: PropTypes.array,
     conditions: PropTypes.object,
-    onSave: PropTypes.func.isRequired
+    onSave: PropTypes.func.isRequired,
+    isSaving: PropTypes.bool
   }
 
   static defaultProps = {
@@ -62,7 +63,13 @@ class Campaign extends PureComponent {
   canSaveCampaign = () =>
     this.setState(state => {
       const { campaign, defaultOffers } = state
-      const canSave = Boolean(campaign.name && campaign.vertical && campaign.subVertical && defaultOffers.length)
+      const canSave = !!(
+        campaign.name &&
+        campaign.vertical &&
+        campaign.subVertical &&
+        defaultOffers.length &&
+        defaultOffers[0].value !== '0'
+      )
       return { canSave }
     })
 
@@ -73,7 +80,7 @@ class Campaign extends PureComponent {
 
   onSaveCampaign = () => this.props.onSave(this.state)
 
-  onChangeDefaultOffers = defaultOffers => this.setState({ defaultOffers })
+  onChangeDefaultOffers = defaultOffers => this.setState({ defaultOffers }, this.canSaveCampaign)
 
   componentWillMount() {
     const { campaign, defaultOffers = [], rules = [] } = this.props
@@ -81,7 +88,7 @@ class Campaign extends PureComponent {
   }
   render() {
     const { campaign: { name, vertical, subVertical }, canSave, defaultOffers, rules } = this.state
-    const { defaultOffersList, conditions, verticals } = this.props
+    const { defaultOffersList, conditions, verticals, isSaving } = this.props
     return (
       <Fragment>
         <CampaignSettings
@@ -92,6 +99,7 @@ class Campaign extends PureComponent {
           verticalsList={verticals}
           onChange={this.onChangeCampaignSettings}
           onSave={this.onSaveCampaign}
+          isSaving={isSaving}
         />
         <DefaultRule offers={defaultOffersList} activeOffers={defaultOffers} onChange={this.onChangeDefaultOffers} />
         <RulesContainer

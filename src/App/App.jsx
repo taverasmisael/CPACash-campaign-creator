@@ -4,7 +4,7 @@ import Loadable from 'react-loadable'
 // import { GetInitialState, GetDefaultOffersList } from '../services/initdata'
 
 const Campaign = Loadable({
-  loader: () => import(/* webpackChunkName: "campaign" */ '../containers/Campaign/Campaign'),
+  loader: () => import(/* webpackChunkName: "campaign" */ '../containers/Campaign'),
   loading: ({ pastDelay }) => pastDelay && 'Loading...',
   delay: 1500
 })
@@ -18,7 +18,16 @@ class App extends PureComponent {
     errorMessage: ''
   }
 
-  saveCampaign = campaignInfo => console.log(campaignInfo)
+  saveCampaign = async campaignInfo => {
+    const { SaveCampaign } = await import(/* webpackChunkName: "savecampaign" */ '../services/saveCampaign')
+    this.setState({ saving: true })
+    try {
+      const response = await SaveCampaign(campaignInfo)
+      this.setState({ saving: response && false })
+    } catch (error) {
+      this.setState({ campaignError: true, campaignErrorMessage: error.message })
+    }
+  }
 
   loadInitialState = async campaignId => {
     this.setState({ loading: true, hasError: false, errorMessage: '' })
@@ -40,8 +49,8 @@ class App extends PureComponent {
     }
   }
 
-  setInitialState = () => {
-    this.loadInitialState().then(state => this.setState(state))
+  setInitialState = id => {
+    this.loadInitialState(id).then(state => this.setState(state))
   }
   componentDidMount() {
     import(/* webpackChunkName: "initdata" */ '../services/initdata').then(
@@ -62,22 +71,28 @@ class App extends PureComponent {
       defaultOffers,
       rules,
       hasError,
-      errorMessage
+      errorMessage,
+      saving,
+      campaignError,
+      campaignErrorMessage
     } = this.state
     return (
       <Campaign
         loadingMessage="Loading verticals and conditions"
-        hasError={hasError}
-        onRetry={this.setInitialState}
-        errorMessage={errorMessage}
-        isLoading={loading}
-        defaultOffers={defaultOffers}
-        rules={rules}
         campaign={campaign}
-        defaultOffersList={defaultOffersList}
         conditions={conditions}
-        verticals={verticals}
+        defaultOffers={defaultOffers}
+        defaultOffersList={defaultOffersList}
+        errorMessage={errorMessage}
+        hasError={hasError}
+        campaignError={campaignError}
+        campaignErrorMessage={campaignErrorMessage}
+        isLoading={loading}
+        isSaving={saving}
+        onRetry={this.setInitialState}
         onSave={this.saveCampaign}
+        rules={rules}
+        verticals={verticals}
       />
     )
   }
