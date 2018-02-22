@@ -10,12 +10,12 @@ import AsyncLoading from '../../components/AsyncLoading'
 import CampaignSettings from '../../components/CampaignSettings'
 
 const RulesContainer = Loadable({
-  loader: () => import('../RulesContainer'),
+  loader: () => import(/* webpackChunkName: "ruleContainer" */ '../RulesContainer'),
   loading: AsyncLoading({ name: 'Rules Container' })
 })
 
 const DefaultRule = Loadable({
-  loader: () => import('../../components/DefaultRule'),
+  loader: () => import(/* webpackChunkName: "defaultRule" */ '../../components/DefaultRule'),
   loading: AsyncLoading({ name: 'Default Rule' })
 })
 

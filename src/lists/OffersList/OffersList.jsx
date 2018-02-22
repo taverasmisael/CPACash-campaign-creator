@@ -7,7 +7,7 @@ import EmptyContainer from '../../HOCs/EmptyContainer'
 import AsyncLoading from '../../components/AsyncLoading'
 
 const Offer = Loadable({
-  loader: () => import('../../components/Offer'),
+  loader: () => import(/* webpackChunkName: "offer" */ '../../components/Offer'),
   loading: AsyncLoading({ name: 'Offers' })
 })
 const OfferShape = PropTypes.shape({

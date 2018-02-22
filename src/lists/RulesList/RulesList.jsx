@@ -16,12 +16,12 @@ import EmptyContainer from '../../HOCs/EmptyContainer'
 import AsyncLoading from '../../components/AsyncLoading'
 
 const Rule = Loadable({
-  loader: () => import('../../components/Rule'),
+  loader: () => import(/* webpackChunkName: "rule" */ '../../components/Rule'),
   loading: AsyncLoading({ name: 'Rule' })
 })
 
 const DeleteButton = Loadable({
-  loader: () => import('../../components/DeleteButton'),
+  loader: () => import(/* webpackChunkName: "deleteButton" */ '../../components/DeleteButton'),
   loading: AsyncLoading({ name: 'Rule' })
 })
 

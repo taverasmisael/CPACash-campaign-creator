@@ -9,7 +9,7 @@ import AsyncLoading from '../../components/AsyncLoading'
 import ConditionClass from '../../models/conditions'
 
 const Condition = Loadable({
-  loader: () => import('../../components/Condition'),
+  loader: () => import(/* webpackChunkName: "condition" */ '../../components/Condition'),
   loading: AsyncLoading({ name: 'Conditions' })
 })
 
