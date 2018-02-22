@@ -11,7 +11,6 @@ import CancelIcon from 'material-ui-icons/Cancel'
 import Option from './Option'
 
 import VirtualizedSelect from 'react-virtualized-select'
-import 'react-select/dist/react-select.css'
 
 import withStyles from 'material-ui/styles/withStyles'
 import styles from './styles'

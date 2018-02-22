@@ -2,7 +2,7 @@ import { InitData, GetOffers } from './api'
 import Conditions from '../models/conditions'
 import Campaign from '../models/campaign'
 import Rule from '../models/rule'
-import { mapOffers } from './normalizers'
+import { mapOffers } from '../utilities/normalizers'
 import FetchError from './FetchError'
 export const GetInitialState = async id => {
   try {

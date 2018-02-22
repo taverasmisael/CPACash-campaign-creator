@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+import Loadable from 'react-loadable'
+
 import ExpansionPanel, {
   ExpansionPanelSummary,
   ExpansionPanelDetails,
@@ -11,8 +13,17 @@ import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
 
 import EmptyContainer from '../../HOCs/EmptyContainer'
-import Rule from '../../components/Rule'
-import DeleteButton from '../../components/DeleteButton'
+import AsyncLoading from '../../components/AsyncLoading'
+
+const Rule = Loadable({
+  loader: () => import(/* webpackChunkName: "rule" */ '../../components/Rule'),
+  loading: AsyncLoading({ name: 'Rule' })
+})
+
+const DeleteButton = Loadable({
+  loader: () => import(/* webpackChunkName: "deleteButton" */ '../../components/DeleteButton'),
+  loading: AsyncLoading({ name: 'Rule' })
+})
 
 const RuleShape = PropTypes.shape({
   id: PropTypes.string.isRequired,
