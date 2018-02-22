@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v1.0.0...v1.1.0) (2018-02-22)
+
+
+### Bug Fixes
+
+* **compatibility:** move react-select styles to root component ([0decdbd](https://github.com/taverasmisael/CPACash-campaign-creator/commit/0decdbd))
+* **perf:**  Autocomplete adjust inline-styles for Option component ([8abfae3](https://github.com/taverasmisael/CPACash-campaign-creator/commit/8abfae3))
+* **PropType:** change PropType=>propType ([9753c46](https://github.com/taverasmisael/CPACash-campaign-creator/commit/9753c46))
+
+
+### Features
+
+* **App:** lazy load App subcomponents and services ([e76d100](https://github.com/taverasmisael/CPACash-campaign-creator/commit/e76d100))
+* **AsyncLoading:** create to display while loading async components ([1028f31](https://github.com/taverasmisael/CPACash-campaign-creator/commit/1028f31))
+* **lib:** install react-loadable ([ad9732f](https://github.com/taverasmisael/CPACash-campaign-creator/commit/ad9732f))
+* **LoadbleLists:** load async components used in lists ([fb5505e](https://github.com/taverasmisael/CPACash-campaign-creator/commit/fb5505e))
+* **Loading:** split component and use Loadable to load parts ([b00e505](https://github.com/taverasmisael/CPACash-campaign-creator/commit/b00e505))
+* **pastDelay:** ensure the delay time has passed before show loading ([fa38f34](https://github.com/taverasmisael/CPACash-campaign-creator/commit/fa38f34))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v0.8.0...v1.0.0) (2018-02-21)
 
