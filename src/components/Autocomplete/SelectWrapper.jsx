@@ -19,6 +19,7 @@ import styles from './styles'
 const SelectWrapper = ({ classes, emptyText = 'Not results were found.', ...props }) => (
   <VirtualizedSelect
     optionRenderer={Option}
+    optionHeight={48}
     noResultsText={<Typography variant="caption">{emptyText}</Typography>}
     arrowRenderer={arrowProps => (arrowProps.isOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />)}
     clearRenderer={() => <ClearIcon />}

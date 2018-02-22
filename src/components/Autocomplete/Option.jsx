@@ -3,23 +3,21 @@ import PropTypes from 'prop-types'
 
 import MenuItem from 'material-ui/Menu/MenuItem'
 
-const Option = ({ key, isFocused, isSelected, focusOption, selectValue, option, ...props }) => {
-  const handleClick = event => selectValue(option, event)
+const Option = ({ key, style, focusedOption, focusOption, selectValue, option }) => {
+  const isFocused = focusedOption.label === option.label
+  const handleClick = () => selectValue(option)
+  const styles = {
+    ...style,
+    height: 24,
+    fontWeight: isFocused ? 500 : 400
+  }
   return (
-    <MenuItem
-      key={key}
-      onFocus={focusOption}
-      selected={isFocused}
-      onClick={handleClick}
-      component="h1"
-      style={{
-        fontWeight: isSelected ? 500 : 400
-      }}
-    >
+    <MenuItem key={key} onFocus={focusOption} selected={isFocused} onClick={handleClick} style={styles}>
       {option.label}
     </MenuItem>
   )
 }
+
 Option.propTypes = {
   key: PropTypes.string.isRequired,
   isFocused: PropTypes.bool,
