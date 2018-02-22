@@ -14,10 +14,14 @@ import Divider from 'material-ui/Divider'
 
 import EmptyContainer from '../../HOCs/EmptyContainer'
 import AsyncLoading from '../../components/AsyncLoading'
-import DeleteButton from '../../components/DeleteButton'
 
 const Rule = Loadable({
   loader: () => import('../../components/Rule'),
+  loading: AsyncLoading({ name: 'Rule' })
+})
+
+const DeleteButton = Loadable({
+  loader: () => import('../../components/DeleteButton'),
   loading: AsyncLoading({ name: 'Rule' })
 })
 

@@ -1,12 +1,23 @@
 import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+import Loadable from 'react-loadable'
+
 import { v4 as uuid } from 'uuid'
 
 import Loading from '../../HOCs/Loading'
+import AsyncLoading from '../../components/AsyncLoading'
 import CampaignSettings from '../../components/CampaignSettings'
-import RulesContainer from '../RulesContainer'
-import DefaultRule from '../../components/DefaultRule'
+
+const RulesContainer = Loadable({
+  loader: () => import('../RulesContainer'),
+  loading: AsyncLoading({ name: 'Rules Container' })
+})
+
+const DefaultRule = Loadable({
+  loader: () => import('../../components/DefaultRule'),
+  loading: AsyncLoading({ name: 'Default Rule' })
+})
 
 class Campaign extends PureComponent {
   static propTypes = {
