@@ -5,7 +5,7 @@ import Loadable from 'react-loadable'
 
 const Campaign = Loadable({
   loader: () => import(/* webpackChunkName: "campaign" */ '../containers/Campaign/Campaign'),
-  loading: ({pastDelay}) => pastDelay && 'Loading...',
+  loading: ({ pastDelay }) => pastDelay && 'Loading...',
   delay: 1500
 })
 class App extends PureComponent {
@@ -23,8 +23,9 @@ class App extends PureComponent {
   loadInitialState = async campaignId => {
     this.setState({ loading: true, hasError: false, errorMessage: '' })
     try {
-      const campaign = await this.loadCampaign(campaignId)
-      const defaultOffersList = await this.loadDefaultOffersList()
+      const campaignPromise = this.loadCampaign(campaignId)
+      const defaultOffersListPromise = this.loadDefaultOffersList()
+      const [campaign, defaultOffersList] = await Promise.all([campaignPromise, defaultOffersListPromise])
       return {
         defaultOffersList,
         loading: false,
