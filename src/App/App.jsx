@@ -1,8 +1,13 @@
 import React, { PureComponent } from 'react'
-import Campaign from '../containers/Campaign/Campaign'
+import Loadable from 'react-loadable'
 
-import { GetInitialState, GetDefaultOffersList } from '../services/initdata'
+// import { GetInitialState, GetDefaultOffersList } from '../services/initdata'
 
+const Campaign = Loadable({
+  loader: () => import(/* webpackChunkName: "campaign" */ '../containers/Campaign/Campaign'),
+  loading: ({pastDelay}) => pastDelay && 'Loading...',
+  delay: 1500
+})
 class App extends PureComponent {
   state = {
     conditions: {},
@@ -14,12 +19,6 @@ class App extends PureComponent {
   }
 
   saveCampaign = campaignInfo => console.log(campaignInfo)
-  loadCampaign = id => {
-    return GetInitialState(id)
-  }
-  loadDefaultOffersList = () => {
-    return GetDefaultOffersList()
-  }
 
   loadInitialState = async campaignId => {
     this.setState({ loading: true, hasError: false, errorMessage: '' })
@@ -44,7 +43,13 @@ class App extends PureComponent {
     this.loadInitialState().then(state => this.setState(state))
   }
   componentDidMount() {
-    this.setInitialState()
+    import(/* webpackChunkName: "initdata" */ '../services/initdata').then(
+      ({ GetDefaultOffersList, GetInitialState }) => {
+        this.loadCampaign = GetInitialState
+        this.loadDefaultOffersList = GetDefaultOffersList
+        this.setInitialState()
+      }
+    )
   }
   render() {
     const {
