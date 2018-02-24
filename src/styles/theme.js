@@ -41,6 +41,12 @@ const Theme = createMuiTheme({
         }
       }
     },
+    MuiSnackbarContent: {
+      message: {
+        display: 'flex',
+        alignItems: 'center',
+      }
+    },
     MuiChip: {
       root: {
         margin: DEFAULT_SPACING / 4
