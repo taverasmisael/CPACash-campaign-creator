@@ -57,15 +57,22 @@ class Rule extends PureComponent {
 
   handleChange = slice => ({ id, name, value }) => {
     let callback = slice === 'activeConditions' ? this.updateOffersList : this.onChange
-    this.setState(state => ({ [slice]: state[slice].map(v => (v.id === id ? { ...v, [name]: value } : v)) }), callback)
+    this.setState(
+      state => ({
+        [slice]: state[slice].map(v => (v.id === id ? { ...v, [name]: value } : v))
+      }),
+      callback
+    )
   }
-
+  getOffersList = async resetOffers => {
+    const conditions = prepareConditions(this.state.activeConditions)
+    const offersList = await GetOffersList(conditions)
+    this.setState({ offersList, ...(resetOffers ? { activeOffers: [] } : {}) }, this.onChange)
+  }
   updateOffersList = () => {
     if (!compare(this.state.prevConditions, this.state.activeConditions)) {
-      const conditions = prepareConditions(this.state.activeConditions)
-      GetOffersList(conditions).then(offersList => {
-        this.setState(state => ({ offersList, activeOffers: [], prevConditions: state.activeConditions }))
-      })
+      this.setState(state => ({ prevConditions: state.activeConditions }))
+      this.getOffersList(true)
     }
     this.onChange()
   }
@@ -76,7 +83,7 @@ class Rule extends PureComponent {
 
   componentDidMount() {
     const { activeOffers, activeConditions } = this.props
-    this.setState({ activeOffers, activeConditions }, this.updateOffersList.bind(this, true))
+    this.setState({ activeOffers, activeConditions }, this.getOffersList)
   }
   render() {
     const { conditions, activeConditions, activeOffers } = this.props
