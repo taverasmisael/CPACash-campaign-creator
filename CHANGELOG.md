@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v1.1.0...v1.2.0) (2018-02-24)
+
+
+### Features
+
+* **CampaignMessage:** handle saving response in a better way ([620e71e](https://github.com/taverasmisael/CPACash-campaign-creator/commit/620e71e))
+* **GetIdFromURL:** now the campaign id is taken from location.search ([435ce9c](https://github.com/taverasmisael/CPACash-campaign-creator/commit/435ce9c))
+* **SaveCampaign:** complete the saving proccess ([bd70517](https://github.com/taverasmisael/CPACash-campaign-creator/commit/bd70517))
+* **Snackbar:** abstract snackbar component to display messages ([c4bf10c](https://github.com/taverasmisael/CPACash-campaign-creator/commit/c4bf10c))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/taverasmisael/CPACash-campaign-creator/compare/v1.0.0...v1.1.0) (2018-02-22)
 
