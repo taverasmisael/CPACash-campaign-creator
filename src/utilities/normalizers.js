@@ -1,5 +1,5 @@
 import { normalize as normalizr } from 'normalizr'
-import { flip, curry, map, reduce } from 'ramda'
+import { flip, curry, map, reduce, find, propEq, prop, split, compose, fromPairs, tail } from 'ramda'
 
 import ConditionsSchema from '../models/schemas/conditions'
 import { conditionsLabels } from '../models/conditions'
@@ -7,6 +7,9 @@ import { conditionsLabels } from '../models/conditions'
 const normalize = curry(flip(normalizr))
 
 const unique = reduce((acc, curr) => [...acc, ...(acc.includes(curr) ? [] : [curr])], [])
+
+export const getConditionId = key => prop('id', find(propEq('value', key), conditionsLabels))
+export const transformValues = compose(map(v => +v), split(','))
 export const listToSelectOptions = map(v => ({ value: v.id, label: v.text, ...v }))
 export const countriesToSelectOptions = map(v => ({
   value: v.id,
@@ -43,28 +46,36 @@ export const mapConditions = map(({ id, condition_id, values, comparation_expres
 })
 export const NormalizeConditions = normalize(ConditionsSchema)
 
-export const objectToFormData = (obj, form, namespace) => {
-  const fd = form || new FormData()
-  let formKey
+export const objectToFormData = (obj, fd = new FormData(), namespace) => {
+  for (const k in obj) {
+    const formKey = namespace ? `${namespace}[${k}]` : k
 
-  for (const property in obj) {
-    if (obj.hasOwnProperty(property)) {
-      if (namespace) {
-        formKey = `${namespace}[${property}]`
-      } else {
-        formKey = property
-      }
-
-      // if the property is an object, but not a File,
-      // use recursivity.
-      if (typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
-        objectToFormData(obj[property], fd, property)
-      } else {
-        // if it's a string or a File object
-        fd.append(formKey, obj[property])
-      }
+    if (typeof obj[k] === 'object') {
+      objectToFormData(obj[k], fd, formKey)
+    } else {
+      fd.append(formKey, obj[k])
     }
   }
 
   return fd
 }
+const prepareOffersToApi = map(o => ({ id: o.value, weight: o.weight }))
+const preapareConditionsToApi = map(({ conditionKey, mode, value }) => ({
+  id: getConditionId(conditionKey),
+  comparation_expression: mode,
+  values: transformValues(value)
+}))
+const prepareRulesToApi = map(r => ({
+  offers: prepareOffersToApi(r.activeOffers),
+  conditions: preapareConditionsToApi(r.activeConditions)
+}))
+export const preapaeCampaignToApi = ({ campaign, defaultOffers, rules }) => ({
+  id: campaign.id,
+  name: campaign.name,
+  vertical_id: campaign.vertical,
+  subvertical_id: campaign.subVertical,
+  defaultOffers: prepareOffersToApi(defaultOffers),
+  rules: prepareRulesToApi(rules)
+})
+
+export const GetIdFromURL = compose(prop('id'), fromPairs, map(split('=')), compose(split('&'), tail))

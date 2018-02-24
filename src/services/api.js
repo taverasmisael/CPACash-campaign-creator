@@ -25,13 +25,28 @@ export const GetOffers = async conditions => {
   const body = objectToFormData({ conditions })
   console.log('this would be body', body)
   try {
-    const res = await fetch(BaseUrl)
+    const res = await fetch(BaseUrl) // TODO: use the real 'POST' Request and append the body
     if (res.ok) {
       const result = await res.json()
       return result
     } else {
       throw new Error(res.status)
     }
+  } catch (error) {
+    throw error
+  }
+}
+
+export const SaveCampaign = async (id, campaign) => {
+  const BaseUrl = 'https://jsonplaceholder.typicode.com/posts'
+  const body = objectToFormData(campaign)
+  try {
+    const res = await fetch(`${BaseUrl}${id ? `?id=${id}` : ''}`, { method: 'POST', body })
+    if (res.ok) {
+      const result = await res.json()
+      return result
+    }
+    throw new Error(res.status)
   } catch (error) {
     throw error
   }
