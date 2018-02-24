@@ -1,10 +1,14 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import Loadable from 'react-loadable'
-
-// import { GetInitialState, GetDefaultOffersList } from '../services/initdata'
 
 const Campaign = Loadable({
   loader: () => import(/* webpackChunkName: "campaign" */ '../containers/Campaign'),
+  loading: ({ pastDelay }) => pastDelay && 'Loading...',
+  delay: 1500
+})
+
+const CampaignMessage = Loadable({
+  loader: () => import(/* webpackChunkName: "campaignMessage" */ '../components/Snackbar'),
   loading: ({ pastDelay }) => pastDelay && 'Loading...',
   delay: 1500
 })
@@ -15,17 +19,21 @@ class App extends PureComponent {
     verticals: [],
     defaultOffersList: [],
     loading: true,
-    errorMessage: ''
+    errorMessage: '',
+    savingMessage: '',
+    isSaving: false,
+    savingError: false
   }
 
   saveCampaign = async campaignInfo => {
+    this.setState({ isSaving: true, savingMessage: '', savingError: false })
     const { SaveCampaign } = await import(/* webpackChunkName: "savecampaign" */ '../services/saveCampaign')
-    this.setState({ saving: true })
     try {
-      const response = await SaveCampaign(campaignInfo)
-      this.setState({ saving: response && false })
+      await SaveCampaign(campaignInfo)
+      this.setState({ isSaving: false, savingMessage: 'Campaign has been saved!' })
     } catch (error) {
-      this.setState({ campaignError: true, campaignErrorMessage: error.message })
+      console.error(error.details)
+      this.setState({ savingError: true, isSaving: false, savingMessage: error.message })
     }
   }
 
@@ -41,6 +49,7 @@ class App extends PureComponent {
         ...campaign
       }
     } catch (error) {
+      console.error(error.details)
       return {
         hasError: true,
         errorMessage: error.message,
@@ -48,6 +57,8 @@ class App extends PureComponent {
       }
     }
   }
+
+  closeSavingMessage = (e, reason) => reason !== 'clickaway' && this.setState({ savingMessage: '' })
 
   setInitialState = id => {
     this.loadInitialState(id).then(state => this.setState(state))
@@ -72,28 +83,38 @@ class App extends PureComponent {
       rules,
       hasError,
       errorMessage,
-      saving,
+      isSaving,
       campaignError,
-      campaignErrorMessage
+      campaignErrorMessage,
+      savingMessage,
+      savingError
     } = this.state
     return (
-      <Campaign
-        loadingMessage="Loading verticals and conditions"
-        campaign={campaign}
-        conditions={conditions}
-        defaultOffers={defaultOffers}
-        defaultOffersList={defaultOffersList}
-        errorMessage={errorMessage}
-        hasError={hasError}
-        campaignError={campaignError}
-        campaignErrorMessage={campaignErrorMessage}
-        isLoading={loading}
-        isSaving={saving}
-        onRetry={this.setInitialState}
-        onSave={this.saveCampaign}
-        rules={rules}
-        verticals={verticals}
-      />
+      <Fragment>
+        <Campaign
+          loadingMessage="Loading verticals and conditions"
+          campaign={campaign}
+          conditions={conditions}
+          defaultOffers={defaultOffers}
+          defaultOffersList={defaultOffersList}
+          errorMessage={errorMessage}
+          hasError={hasError}
+          campaignError={campaignError}
+          campaignErrorMessage={campaignErrorMessage}
+          isLoading={loading}
+          isSaving={isSaving}
+          onRetry={this.setInitialState}
+          onSave={this.saveCampaign}
+          rules={rules}
+          verticals={verticals}
+        />
+        <CampaignMessage
+          isError={savingError}
+          show={!!savingMessage}
+          message={savingMessage}
+          onClose={this.closeSavingMessage}
+        />
+      </Fragment>
     )
   }
 }
