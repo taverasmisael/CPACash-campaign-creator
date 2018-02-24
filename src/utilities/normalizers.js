@@ -1,5 +1,5 @@
 import { normalize as normalizr } from 'normalizr'
-import { flip, curry, map, reduce, find, propEq, prop, split, compose } from 'ramda'
+import { flip, curry, map, reduce, find, propEq, prop, split, compose, fromPairs, tail } from 'ramda'
 
 import ConditionsSchema from '../models/schemas/conditions'
 import { conditionsLabels } from '../models/conditions'
@@ -77,3 +77,5 @@ export const preapaeCampaignToApi = ({ campaign, defaultOffers, rules }) => ({
   defaultOffers: prepareOffersToApi(defaultOffers),
   rules: prepareRulesToApi(rules)
 })
+
+export const GetIdFromURL = compose(prop('id'), fromPairs, map(split('=')), compose(split('&'), tail))

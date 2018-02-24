@@ -60,8 +60,10 @@ class App extends PureComponent {
 
   closeSavingMessage = (e, reason) => reason !== 'clickaway' && this.setState({ savingMessage: '' })
 
-  setInitialState = id => {
-    this.loadInitialState(id).then(state => this.setState(state))
+  setInitialState = () => {
+    import(/* webpackChunkName: "normalizers" */ '../utilities/normalizers').then(({ GetIdFromURL }) =>
+      this.loadInitialState(GetIdFromURL(window.location.search)).then(state => this.setState(state))
+    )
   }
   componentDidMount() {
     import(/* webpackChunkName: "initdata" */ '../services/initdata').then(
